@@ -1,0 +1,281 @@
+/* GOOD EXAMPLE — same layout as bad.css, contrast-checked and semantics
+   fixed. See facilitator-notes.html for what changed and why.
+   Palette inspired by SDSC's navy + multi-colour accent identity (own
+   original hex values, not copied from their stylesheet) — every accent
+   below is checked to clear 4.5:1 on the background it sits on. */
+
+body {
+  background: #ffffff;
+  color: #1a1a1a; /* ~17:1 on white */
+}
+
+/* Fix: a real, visible focus style — never remove outlines site-wide. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #a35b00;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Fix: skip link is visually hidden until it receives keyboard focus,
+   then it's the first thing announced and the first thing on screen. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: #0d3b66;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0 8px 0;
+  z-index: 10;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+.site-header {
+  background: #ffffff;
+}
+
+.hamburger-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 22px;
+  height: 3px;
+  background: #0d3b66;
+  border-radius: 2px;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+.hamburger-btn span::before,
+.hamburger-btn span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 3px;
+  background: #0d3b66;
+  border-radius: 2px;
+  transition: transform 0.15s ease;
+}
+
+.hamburger-btn span::before {
+  top: -7px;
+}
+
+.hamburger-btn span::after {
+  top: 7px;
+}
+
+/* Fix: icon visually becomes a close (X) glyph when open, matching the
+   aria-expanded/aria-label state change already happening in good.js —
+   sighted users get the same state cue AT users get. */
+.hamburger-btn.is-open span {
+  background: transparent;
+}
+
+.hamburger-btn.is-open span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.hamburger-btn.is-open span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  background: #fff;
+}
+
+/* Fix: a single nav in the DOM, correctly removed via [hidden] when
+   closed — nothing left behind for a screen reader to stumble into. */
+.nav-menu[hidden] {
+  display: none;
+}
+
+.nav-menu a {
+  color: #0d3b66; /* ~11.4:1 on white */
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+/* Fix: visually hidden until focused (same off-screen technique as
+   .skip-link) — a keyboard/screen-reader user reaches this after the
+   last nav link instead of having to tab/shift-tab back to the
+   hamburger button to close the menu. */
+.nav-close-btn {
+  position: absolute;
+  left: -9999px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #0d3b66;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.nav-close-btn:focus {
+  position: static;
+}
+
+.hero {
+  background: #eef2f7;
+}
+
+.hero h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  color: #0d3b66;
+}
+
+.hero p {
+  color: #3d3d3d; /* ~10.4:1 on #eef2f7 */
+}
+
+.btn-primary {
+  background: #D0EC2D;
+  color: #0d3b66; /* ~8.6:1 — dark ink on the bright primary, not white text */
+}
+
+.section-heading {
+  color: #0d3b66;
+}
+
+.event-card {
+  border-color: #c9c9c9;
+  background: #fff;
+}
+
+/* Fix: status is an icon + visible text label, not colour alone, and the
+   two states are distinguishable without relying on hue at all. */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.status-badge.available {
+  background: #e6f4ea;
+  color: #146c2e; /* ~5.4:1 on its own badge background */
+}
+
+.status-badge.full {
+  background: #fce8e6;
+  color: #b3261e; /* ~5.9:1 on its own badge background */
+}
+
+.event-meta {
+  color: #3d3d3d; /* ~10.7:1 on white */
+}
+
+/* Fix: link text describes the destination on its own, out of context
+   (WCAG 2.4.4) — see the visible text in good.html for each card. */
+.event-link {
+  color: #0a636c; /* ~6.97:1 on white */
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+label {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #1a1a1a;
+}
+
+.hint {
+  font-weight: 400;
+  color: #3d3d3d;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  border-color: #5c5c5c; /* clearly visible field boundary */
+  color: #1a1a1a;
+  background: #fff;
+}
+
+input::placeholder {
+  color: #5c5c5c;
+}
+
+.btn-submit {
+  background: #D0EC2D;
+  color: #0d3b66; /* ~8.6:1 — same primary/ink pairing as .btn-primary */
+}
+
+.spotlight-quote {
+  color: #1a1a1a;
+}
+
+.spotlight-role {
+  color: #a8235f; /* ~6.84:1 on white */
+  font-size: 0.875rem;
+  margin: 0.15rem 0 0;
+}
+
+.news-item {
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.news-link {
+  color: #0a636c; /* ~6.97:1 on white */
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.site-footer {
+  background: #f3f6fa;
+}
+
+.social-row a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e6edf6;
+}
+
+.social-icon {
+  fill: #0d3b66;
+}
+
+.footer-links a {
+  color: #3d6b1c; /* ~6.3:1 on #f3f6fa */
+  text-decoration: underline;
+  font-size: 0.875rem;
+}

@@ -1,0 +1,205 @@
+/* Shared layout & typography — identical in bad.html and good.html.
+   Colour, contrast, and focus-state rules live in bad.css / good.css,
+   NOT here, so the two demos stay visually similar apart from the
+   accessibility fixes being taught. */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Header */
+
+.site-header {
+  padding: 0.875rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo {
+  height: 32px;
+}
+
+/* Hero */
+
+.hero {
+  padding: 2rem 1.25rem 1.75rem;
+  text-align: center;
+}
+
+.hero img {
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.hero p {
+  margin: 0.5rem 0 1.25rem;
+  font-size: 1rem;
+}
+
+/* Sections */
+
+section {
+  padding: 1.75rem 1.25rem;
+}
+
+.section-heading {
+  font-size: 1.25rem;
+  margin: 0 0 1rem;
+}
+
+/* Event cards */
+
+.event-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.event-card {
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid;
+}
+
+.event-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.event-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0 0 0.25rem;
+}
+
+.event-meta {
+  font-size: 0.875rem;
+  margin: 0 0 0.5rem;
+}
+
+/* Form */
+
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+/* Spotlight */
+
+.spotlight-card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.spotlight-card img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.spotlight-quote {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+/* News */
+
+.news-item {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-headline {
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  font-size: 0.9375rem;
+}
+
+/* Footer */
+
+.site-footer {
+  padding: 1.75rem 1.25rem 2.5rem;
+  text-align: center;
+}
+
+.social-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.social-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}

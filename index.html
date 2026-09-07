@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Designing for Visual Impairment — Workshop Demo</title>
+<style>
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.5;
+  }
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 3rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin: 0 0 0.75rem;
+  }
+  p.intro {
+    color: #3d3d3d;
+    margin: 0 0 2rem;
+  }
+  .card-link {
+    display: block;
+    text-decoration: none;
+    border: 1px solid #c9c9c9;
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+  .card-link h2 {
+    font-size: 1.0625rem;
+    margin: 0 0 0.25rem;
+    color: #0b4f9e;
+  }
+  .card-link p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: #3d3d3d;
+  }
+  a:focus-visible {
+    outline: 3px solid #a35b00;
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Designing for People with Visual Impairment</h1>
+    <p class="intro">A before/after demo of the fictional "Let's Play" sports community site, built for a live screen-reader walkthrough workshop.</p>
+
+    <a class="card-link" href="bad.html">
+      <h2>1. Bad Example</h2>
+      <p>Go through this with a screen reader first — it fails several WCAG success criteria.</p>
+    </a>
+
+    <a class="card-link" href="good.html">
+      <h2>2. Good Example</h2>
+      <p>Same site, same content, with the accessibility issues fixed.</p>
+    </a>
+
+    <a class="card-link" href="facilitator-notes.html">
+      <h2>Facilitator Notes</h2>
+      <p>Every issue, its WCAG success criterion, and the fix — for narrating the middle section of the workshop.</p>
+    </a>
+  </div>
+</body>
+</html>
