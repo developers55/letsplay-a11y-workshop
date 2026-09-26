@@ -246,7 +246,8 @@ input::placeholder {
 }
 
 .news-item {
-  border-bottom: 1px solid #d9d9d9;
+  border-color: #d9d9d9;
+  background: #fff;
 }
 
 .news-link {

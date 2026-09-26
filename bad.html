@@ -10,10 +10,10 @@
 <body>
 
   <div class="site-header">
-    <img class="logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='32'%3E%3Ctext x='0' y='22' font-family='sans-serif' font-size='19' font-weight='bold' fill='%230b4f9e'%3ELet's Play%3C/text%3E%3C/svg%3E" alt="logo.png">
+    <a href="bad.html"><img class="logo" src="assets/logo_1.svg" alt="logo_1.svg"></a>
 
     <!-- Issue: now reachable and activatable by keyboard (tabindex +
-         Enter/Space handler), but still just a <div> — no role, no
+         Enter/Space handler), but still just a <div>, no role, no
          accessible name, no aria-expanded. AT users land on it but get
          no announcement of what it is or whether it's open (WCAG 4.1.2). -->
     <div class="hamburger" tabindex="0" onclick="toggleMenu()" onkeydown="handleHamburgerKey(event)">
@@ -22,79 +22,123 @@
   </div>
 
   <!-- Issue: heading/paragraph/CTA are set directly on top of a busy
-       photo with no scrim/overlay behind them and no contrast check —
+       photo/gradient with no scrim/overlay and no contrast check,
        whether the text is readable depends entirely on which part of
-       the image happens to sit behind it (WCAG 1.4.3). -->
-  <div class="hero">
-    <div class="hero-title">Welcome to Let's Play</div>
-    <p>A community sports club for people of all abilities.</p>
-    <a href="#" class="btn btn-primary">Join a Session</a>
+       the slide happens to sit behind it (WCAG 1.4.3). -->
+  <!-- Issue: a second auto-advancing carousel, now the very first thing
+       on the page, same missing pause/stop control as the news carousel
+       below (WCAG 2.2.2), and it doesn't respect prefers-reduced-motion
+       either. See the arrow/dot controls further down for the other bug
+       introduced here (unlabelled buttons). -->
+  <div class="hero-carousel" id="hero-carousel">
+    <div class="carousel-slide is-active" style="background-image:url('images/hero-banner.jpg')">
+      <div class="hero-title">Welcome to Let's Play</div>
+      <p>A community sports club for people of all abilities.</p>
+      <button type="button" class="btn btn-view-activities">View upcoming events</button>
+    </div>
+    <div class="carousel-slide" style="background-image:linear-gradient(135deg, #3a1030, #7a1f3d)">
+      <div class="hero-title">Every Body Belongs</div>
+      <p>Adaptive programs for every ability, every week.</p>
+      <button type="button" class="btn btn-view-activities">View upcoming events</button>
+    </div>
+    <div class="carousel-slide" style="background-image:linear-gradient(135deg, #4a0f22, #8f2a1f)">
+      <div class="hero-title">Find Your Team</div>
+      <p>Meet teammates who get what you're going through.</p>
+      <button type="button" class="btn btn-view-activities">View upcoming events</button>
+    </div>
+
+    <!-- Issue: slide-picker dots are bare <button> elements, no text,
+         no aria-label, no aria-current on the active dot. A screen
+         reader announces all three as identical, bare "button"s with
+         no way to tell which dot is which slide (WCAG 4.1.2). -->
+    <div class="carousel-dots">
+      <button type="button" class="carousel-dot is-active" onclick="goToHeroSlide(0)"></button>
+      <button type="button" class="carousel-dot" onclick="goToHeroSlide(1)"></button>
+      <button type="button" class="carousel-dot" onclick="goToHeroSlide(2)"></button>
+    </div>
   </div>
 
   <section>
     <h4 class="section-heading">Upcoming Events</h4>
     <!-- Issue: no list semantics. This "list" of events is just a stack
-         of <div>s — a screen reader never announces "list, 3 items" or
+         of <div>s, a screen reader never announces "list, 3 items" or
          where one event ends and the next begins, so combined with the
-         identical "Click Here" links below, Dennard has no reliable way
+         identical "Register" links below, Dennard has no reliable way
          to tell how many events there are or which details go together. -->
     <div class="event-list">
 
+      <!-- Issue: event card images with no alt attribute at all, not
+           even alt="", just missing entirely (WCAG 1.1.1). Browsers fall
+           back to announcing the raw src/filename to a screen reader. -->
+      <!-- Issue: image carousel with dots only, no arrows, same
+           unlabelled-control bug as the hero carousel (see issue #17):
+           bare <button> dots, no aria-label, no aria-current. -->
       <div class="event-card" onclick="location.href='#'">
+        <div class="event-image-carousel" id="event-carousel-1">
+          <img class="event-image is-active" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23d7e3f4'/%3E%3C/svg%3E">
+          <img class="event-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23c3d6ef'/%3E%3C/svg%3E">
+          <div class="carousel-dots">
+            <button type="button" class="carousel-dot is-active" onclick="goToEventSlide('event-carousel-1', 0)"></button>
+            <button type="button" class="carousel-dot" onclick="goToEventSlide('event-carousel-1', 1)"></button>
+          </div>
+        </div>
         <div class="event-card-top">
-          <div class="event-title">Wheelchair Basketball Meetup</div>
+          <div class="event-title">Tuesday Stadium Run</div>
           <span class="status-dot green" title="Spots available"></span>
         </div>
-        <!-- Issue: numeric slash date — a screen reader reads this as
+        <!-- Issue: numeric slash date, a screen reader reads this as
              "fourteen slash three" instead of a date, and day/month order
-             is locale-ambiguous (is 4/3 April 3rd or March 4th?). -->
-        <p class="event-meta">Sat, 14/3 &middot; Toa Payoh Sports Hall</p>
-        <a href="#" class="event-link">Click Here</a>
+             is locale-ambiguous (is 4/3 April 3rd or March 4th?). Stacking
+             three of them in a row makes it worse, not better. -->
+        <p class="event-meta">Tue, 10/3, 17/3, 24/3 &middot; Stadium Waterfront Promenade</p>
+        <p class="event-desc">An easy-paced group run along the waterfront, great for building a weekly habit. All paces welcome, and the group regroups every kilometre. Meet at the main entrance; bring water and comfortable shoes.</p>
+        <a href="bad-register.html" class="btn btn-primary">Register</a>
       </div>
 
       <div class="event-card" onclick="location.href='#'">
+        <div class="event-image-carousel" id="event-carousel-2">
+          <img class="event-image is-active" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23f4d7e3'/%3E%3C/svg%3E">
+          <img class="event-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23efc3d6'/%3E%3C/svg%3E">
+          <div class="carousel-dots">
+            <button type="button" class="carousel-dot is-active" onclick="goToEventSlide('event-carousel-2', 0)"></button>
+            <button type="button" class="carousel-dot" onclick="goToEventSlide('event-carousel-2', 1)"></button>
+          </div>
+        </div>
         <div class="event-card-top">
-          <div class="event-title">Boccia Beginners Clinic</div>
+          <div class="event-title">Wednesday Sunset Yoga</div>
           <span class="status-dot red" title="Fully booked"></span>
         </div>
-        <p class="event-meta">Sun, 22/3 &middot; Community Centre Hall 2</p>
-        <a href="#" class="event-link">Click Here</a>
+        <p class="event-meta">Wed, 11/3, 18/3, 25/3 &middot; Rhu Point Lookout</p>
+        <p class="event-desc">Gentle, accessible yoga as the sun goes down. Suitable for complete beginners, no flexibility required. Mats and props are provided, just bring a water bottle.</p>
+        <a href="bad-register.html" class="btn btn-primary">Register</a>
       </div>
 
       <div class="event-card" onclick="location.href='#'">
+        <div class="event-image-carousel" id="event-carousel-3">
+          <img class="event-image is-active" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23d7f4e3'/%3E%3C/svg%3E">
+          <img class="event-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23c3efd6'/%3E%3C/svg%3E">
+          <div class="carousel-dots">
+            <button type="button" class="carousel-dot is-active" onclick="goToEventSlide('event-carousel-3', 0)"></button>
+            <button type="button" class="carousel-dot" onclick="goToEventSlide('event-carousel-3', 1)"></button>
+          </div>
+        </div>
         <div class="event-card-top">
-          <div class="event-title">SwimTogether Taster Session</div>
+          <div class="event-title">Saturday Reservoir Run</div>
           <span class="status-dot green" title="Spots available"></span>
         </div>
-        <p class="event-meta">Sat, 28/3 &middot; OCBC Aquatic Centre</p>
-        <a href="#" class="event-link">Click Here</a>
+        <p class="event-meta">Sat, 14/3, 21/3, 28/3 &middot; Serangoon Reservoir</p>
+        <p class="event-desc">A scenic loop around the water, open to walkers, joggers, and runners alike. Choose your own pace and distance, and turn back whenever you like. Meet at the boathouse car park.</p>
+        <a href="bad-register.html" class="btn btn-primary">Register</a>
       </div>
 
     </div>
   </section>
 
-  <section>
-    <h4 class="section-heading">Get Involved</h4>
-    <form onsubmit="return false;">
-      <div class="form-group">
-        <input type="text" placeholder="Name">
-      </div>
-      <div class="form-group">
-        <input type="email" placeholder="Email">
-      </div>
-      <div class="form-group">
-        <input type="tel" placeholder="Phone (optional)">
-      </div>
-      <p style="font-size:0.8rem;"><span class="required-mark">*</span> = required</p>
-      <div class="btn btn-submit" onclick="submitForm()">Sign Up</div>
-    </form>
-  </section>
-
-  <section>
+  <section class="spotlight-section">
     <h4 class="section-heading">Athlete Spotlight</h4>
     <div class="spotlight-card">
       <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23cfd8e8'/%3E%3C/svg%3E" alt="IMG_2041.jpg">
-      <p class="spotlight-quote">"Let's Play gave me a team to train with and a reason to get up early on Saturdays." &mdash; Club member</p>
+      <p class="spotlight-quote">"Let's Play gave me a team to train with and a reason to get up early on Saturdays." - Club member</p>
     </div>
   </section>
 
@@ -102,22 +146,39 @@
     <h4 class="section-heading">Latest News</h4>
     <div class="news-carousel" id="news-carousel">
       <div class="news-item is-active">
-        <p class="news-headline">Club wins regional Boccia tournament</p>
-        <a href="#" class="news-link">Read More</a>
+        <img class="news-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23f4e3d7'/%3E%3C/svg%3E">
+        <div class="news-content">
+          <p class="news-headline">Club wins regional Boccia tournament</p>
+          <a href="#" class="news-link">Read More</a>
+        </div>
       </div>
       <div class="news-item">
-        <p class="news-headline">New accessible changing rooms open next month</p>
-        <a href="#" class="news-link">Read More</a>
+        <img class="news-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23d7f4f4'/%3E%3C/svg%3E">
+        <div class="news-content">
+          <p class="news-headline">New accessible changing rooms open next month</p>
+          <a href="#" class="news-link">Read More</a>
+        </div>
       </div>
       <div class="news-item">
-        <p class="news-headline">Volunteer coaches needed for spring term</p>
-        <a href="#" class="news-link">Read More</a>
+        <img class="news-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23e3d7f4'/%3E%3C/svg%3E">
+        <div class="news-content">
+          <p class="news-headline">Volunteer coaches needed for spring term</p>
+          <a href="#" class="news-link">Read More</a>
+        </div>
       </div>
+    </div>
+    <!-- Issue: dots-only navigation, bare <button>s, no text, no
+         aria-label, no aria-current. Same unlabelled-controls bug as
+         the hero/event carousels (WCAG 4.1.2). -->
+    <div class="carousel-dots" id="news-carousel-dots">
+      <button type="button" class="carousel-dot is-active" onclick="goToNewsSlide(0)"></button>
+      <button type="button" class="carousel-dot" onclick="goToNewsSlide(1)"></button>
+      <button type="button" class="carousel-dot" onclick="goToNewsSlide(2)"></button>
     </div>
   </section>
 
   <div class="site-footer">
-    <!-- Issue: icon-only links with no accessible name anywhere — no
+    <!-- Issue: icon-only links with no accessible name anywhere, no
          aria-label on the link, no <title> in the icon. A screen reader
          announces these as bare, indistinguishable "link"s. -->
     <div class="social-row">
@@ -132,28 +193,32 @@
   </div>
 
   <!-- Issue: the actual nav markup lives all the way down here, appended
-       to the end of the DOM (a common real cause of this exact bug — an
+       to the end of the DOM (a common real cause of this exact bug: an
        off-canvas panel moved here for stacking/z-index reasons). Opening
        it moves nothing: no focus() call anywhere in bad.js, and none of
        the page content in between is made inert. So tabbing past the
-       hamburger goes straight into the hero, events, form, etc. — every
-       bit of the page "behind" the open menu — long before it ever
+       hamburger goes straight into the hero, events, spotlight, etc.,
+       every bit of the page "behind" the open menu, long before it ever
        reaches these links (WCAG 2.4.3 Focus Order). -->
   <ul class="nav-menu is-hidden-offscreen" id="nav-copy-1">
     <li><a href="#">Home</a></li>
     <li><a href="#">Events</a></li>
-    <li><a href="#">Get Involved</a></li>
     <li><a href="#">About</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="#">Contact Us</a></li>
+    <li><a href="#">Login</a></li>
   </ul>
 
   <!-- Second copy, left over from an old desktop layout. Nobody ever
-       sees it — but it's not display:none or [hidden], just pushed
+       sees it, but it's not display:none or [hidden], just pushed
        off-screen, so a screen reader still reads all four links. -->
   <ul class="nav-menu is-hidden-offscreen" id="nav-copy-2">
     <li><a href="#">Home</a></li>
     <li><a href="#">Events</a></li>
-    <li><a href="#">Get Involved</a></li>
     <li><a href="#">About</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="#">Contact Us</a></li>
+    <li><a href="#">Login</a></li>
   </ul>
 
   <script src="js/bad.js"></script>

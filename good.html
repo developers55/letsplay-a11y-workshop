@@ -12,7 +12,7 @@
   <a href="#main" class="skip-link">Skip to main content</a>
 
   <header class="site-header">
-    <img class="logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='32'%3E%3Ctext x='0' y='22' font-family='sans-serif' font-size='19' font-weight='bold' fill='%230b4f9e'%3ELet's Play%3C/text%3E%3C/svg%3E" alt="Let's Play home">
+    <a href="good.html"><img class="logo" src="assets/logo_1.svg" alt="Let's Play home"></a>
 
     <button type="button" class="hamburger-btn" id="menu-btn" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu" onclick="toggleMenu()">
       <span></span>
@@ -21,19 +21,21 @@
 
   <!-- A single nav in the DOM. When closed it carries the `hidden`
        attribute, so it is completely removed from the accessibility
-       tree — nothing left for a screen reader to trip over. -->
+       tree, nothing left for a screen reader to trip over. -->
   <nav id="primary-nav" class="nav-menu" hidden aria-label="Primary">
     <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.9rem;">
       <li><a href="#">Home</a></li>
       <li><a href="#events">Events</a></li>
-      <li><a href="#get-involved">Get Involved</a></li>
       <li><a href="#">About</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="#">Contact Us</a></li>
+      <li><a href="#">Login</a></li>
       <!-- Fix: a close control at the end of the menu, so a keyboard/AT
            user who has tabbed through every link can close the menu right
            there instead of tabbing/shifting all the way back up to the
            hamburger button. Visually hidden until it receives focus (same
            technique as .skip-link above) so sighted keyboard users still
-           get a visible focus target — never permanently sr-only. -->
+           get a visible focus target, never permanently sr-only. -->
       <li><button type="button" class="nav-close-btn" onclick="toggleMenu()">Close menu</button></li>
     </ul>
   </nav>
@@ -44,7 +46,7 @@
       <img src="images/hero-banner.jpg" alt="Four Para athletes in action: wheelchair badminton, wheelchair basketball, sledge hockey, and sitting volleyball.">
       <h1>Welcome to Let's Play</h1>
       <p>A community sports club for people of all abilities.</p>
-      <a href="#get-involved" class="btn btn-primary">Join a Session</a>
+      <a href="#events" class="btn btn-primary">Join a Session</a>
     </div>
 
     <section id="events">
@@ -52,55 +54,42 @@
       <ul class="event-list">
 
         <li class="event-card">
+          <img class="event-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23d7e3f4'/%3E%3C/svg%3E" alt="">
           <div class="event-card-top">
-            <h3 class="event-title">Wheelchair Basketball Meetup</h3>
+            <h3 class="event-title">Tuesday Stadium Run</h3>
             <span class="status-badge available">&#9679; Spots available</span>
           </div>
-          <p class="event-meta"><time datetime="2027-03-14">Sat, 14 Mar</time> &middot; Toa Payoh Sports Hall</p>
-          <a href="#" class="event-link">View details for Wheelchair Basketball Meetup</a>
+          <p class="event-meta"><time datetime="2027-03-10">Tue, 10 Mar</time>, <time datetime="2027-03-17">17 Mar</time>, <time datetime="2027-03-24">24 Mar</time> &middot; Stadium Waterfront Promenade</p>
+          <p class="event-desc">An easy-paced group run along the waterfront, great for building a weekly habit. All paces welcome, and the group regroups every kilometre. Meet at the main entrance; bring water and comfortable shoes.</p>
+          <a href="#" class="btn btn-primary">View details for Tuesday Stadium Run</a>
         </li>
 
         <li class="event-card">
+          <img class="event-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23f4d7e3'/%3E%3C/svg%3E" alt="">
           <div class="event-card-top">
-            <h3 class="event-title">Boccia Beginners Clinic</h3>
+            <h3 class="event-title">Wednesday Sunset Yoga</h3>
             <span class="status-badge full">&#9679; Fully booked</span>
           </div>
-          <p class="event-meta"><time datetime="2027-03-22">Sun, 22 Mar</time> &middot; Community Centre Hall 2</p>
-          <a href="#" class="event-link">View details for Boccia Beginners Clinic</a>
+          <p class="event-meta"><time datetime="2027-03-11">Wed, 11 Mar</time>, <time datetime="2027-03-18">18 Mar</time>, <time datetime="2027-03-25">25 Mar</time> &middot; Rhu Point Lookout</p>
+          <p class="event-desc">Gentle, accessible yoga as the sun goes down. Suitable for complete beginners, no flexibility required. Mats and props are provided, just bring a water bottle.</p>
+          <a href="#" class="btn btn-primary">View details for Wednesday Sunset Yoga</a>
         </li>
 
         <li class="event-card">
+          <img class="event-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23d7f4e3'/%3E%3C/svg%3E" alt="">
           <div class="event-card-top">
-            <h3 class="event-title">SwimTogether Taster Session</h3>
+            <h3 class="event-title">Saturday Reservoir Run</h3>
             <span class="status-badge available">&#9679; Spots available</span>
           </div>
-          <p class="event-meta"><time datetime="2027-03-28">Sat, 28 Mar</time> &middot; OCBC Aquatic Centre</p>
-          <a href="#" class="event-link">View details for SwimTogether Taster Session</a>
+          <p class="event-meta"><time datetime="2027-03-14">Sat, 14 Mar</time>, <time datetime="2027-03-21">21 Mar</time>, <time datetime="2027-03-28">28 Mar</time> &middot; Serangoon Reservoir</p>
+          <p class="event-desc">A scenic loop around the water, open to walkers, joggers, and runners alike. Choose your own pace and distance, and turn back whenever you like. Meet at the boathouse car park.</p>
+          <a href="#" class="btn btn-primary">View details for Saturday Reservoir Run</a>
         </li>
 
       </ul>
     </section>
 
-    <section id="get-involved">
-      <h2 class="section-heading">Get Involved</h2>
-      <form onsubmit="return false;">
-        <div class="form-group">
-          <label for="name">Name <span class="hint">(required)</span></label>
-          <input type="text" id="name" name="name" required aria-required="true">
-        </div>
-        <div class="form-group">
-          <label for="email">Email <span class="hint">(required)</span></label>
-          <input type="email" id="email" name="email" required aria-required="true">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone <span class="hint">(optional)</span></label>
-          <input type="tel" id="phone" name="phone">
-        </div>
-        <button type="submit" class="btn btn-submit" onclick="submitForm()">Sign Up</button>
-      </form>
-    </section>
-
-    <section>
+    <section class="spotlight-section">
       <h2 class="section-heading">Athlete Spotlight</h2>
       <div class="spotlight-card">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23cfd8e8'/%3E%3C/svg%3E" alt="Portrait of a smiling Let's Play club member">
@@ -112,16 +101,25 @@
       <h2 class="section-heading">Latest News</h2>
       <ul style="list-style:none;margin:0;padding:0;">
         <li class="news-item">
-          <p class="news-headline">Club wins regional Boccia tournament</p>
-          <a href="#" class="news-link">Read about the regional Boccia tournament win</a>
+          <img class="news-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23f4e3d7'/%3E%3C/svg%3E" alt="">
+          <div class="news-content">
+            <p class="news-headline">Club wins regional Boccia tournament</p>
+            <a href="#" class="news-link">Read about the regional Boccia tournament win</a>
+          </div>
         </li>
         <li class="news-item">
-          <p class="news-headline">New accessible changing rooms open next month</p>
-          <a href="#" class="news-link">Read about the new accessible changing rooms</a>
+          <img class="news-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23d7f4f4'/%3E%3C/svg%3E" alt="">
+          <div class="news-content">
+            <p class="news-headline">New accessible changing rooms open next month</p>
+            <a href="#" class="news-link">Read about the new accessible changing rooms</a>
+          </div>
         </li>
         <li class="news-item">
-          <p class="news-headline">Volunteer coaches needed for spring term</p>
-          <a href="#" class="news-link">Read about volunteering as a coach this spring</a>
+          <img class="news-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23e3d7f4'/%3E%3C/svg%3E" alt="">
+          <div class="news-content">
+            <p class="news-headline">Volunteer coaches needed for spring term</p>
+            <a href="#" class="news-link">Read about volunteering as a coach this spring</a>
+          </div>
         </li>
       </ul>
     </section>

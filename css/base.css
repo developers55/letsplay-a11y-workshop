@@ -40,7 +40,7 @@ img {
 }
 
 .logo {
-  height: 32px;
+  height: 48px;
 }
 
 /* Hero */
@@ -69,6 +69,10 @@ section {
   padding: 1.75rem 1.25rem;
 }
 
+.spotlight-section {
+  background: #f3f6fa;
+}
+
 .section-heading {
   font-size: 1.25rem;
   margin: 0 0 1rem;
@@ -91,6 +95,14 @@ section {
   border: 1px solid;
 }
 
+.event-image {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
 .event-card-top {
   display: flex;
   align-items: center;
@@ -107,6 +119,11 @@ section {
 .event-meta {
   font-size: 0.875rem;
   margin: 0 0 0.5rem;
+}
+
+.event-desc {
+  font-size: 0.875rem;
+  margin: 0 0 0.6rem;
 }
 
 /* Form */
@@ -128,9 +145,10 @@ input[type="tel"] {
 
 .btn {
   display: inline-block;
-  width: 100%;
+  width: auto;
   text-align: center;
-  padding: 0.8rem 1rem;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
@@ -148,8 +166,8 @@ input[type="tel"] {
 }
 
 .spotlight-card img {
-  width: 64px;
-  height: 64px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
@@ -163,12 +181,30 @@ input[type="tel"] {
 /* News */
 
 .news-item {
-  padding: 0.85rem 0;
-  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
 }
 
 .news-item:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.news-image {
+  flex: 1;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  min-width: 0;
+}
+
+.news-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .news-headline {

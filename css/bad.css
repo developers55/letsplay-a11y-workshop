@@ -4,6 +4,13 @@
    (own original hex values, not copied from their stylesheet) —
    the accent tints below are deliberately too light to pass contrast. */
 
+:root {
+  /* Brand colour from the new logo (logo_1.svg). Buttons and text links
+     all use it here — but at ~2.6:1 on white it still fails 1.4.3, so
+     it's scoped to bad.css only. good.css keeps its passing colours. */
+  --brand-color: #00aaf8;
+}
+
 body {
   background: #ffffff;
   color: #10315c;
@@ -36,6 +43,23 @@ body {
   height: 3px;
   background: #10315c;
   border-radius: 2px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+/* Visual-only fix: the icon morphs into an X when open, matching the
+   sighted-user affordance in good.html — but unlike good.html, nothing
+   here is exposed to AT (no aria-expanded, no accessible name at all,
+   see issue #3), so a screen reader user gets none of this feedback. */
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(10.5px) rotate(45deg);
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-10.5px) rotate(-45deg);
 }
 
 /* Issue: the "second" nav copy is hidden using an old off-screen-position
@@ -52,7 +76,7 @@ body {
 }
 
 .nav-menu a {
-  color: #10315c;
+  color: var(--brand-color);
   text-decoration: none;
   font-size: 1rem;
 }
@@ -78,16 +102,32 @@ body {
   top: 0;
 }
 
-/* Issue: hero text sits directly on top of a busy photo — no scrim, no
-   overlay, no contrast check against the image underneath (WCAG 1.4.3).
-   The existing hero-title/paragraph colors below were tuned for a flat
-   light background, not this. */
-.hero {
-  background: #eef2f7 url("../images/hero-banner.jpg") center / cover no-repeat;
-  min-height: 280px;
-  display: flex;
+/* Issue: auto-advancing carousel with no pause/stop control (WCAG 2.2.2)
+   — same flaw as the news carousel further down, but now it's the very
+   first thing on the page. See js/bad.js for the interval. */
+.hero-carousel {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+/* Issue: slide text sits directly on top of a busy photo/gradient — no
+   scrim, no overlay, no contrast check against what's underneath
+   (WCAG 1.4.3). */
+.carousel-slide {
+  display: none;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.25rem 1.75rem;
+  min-height: 560px;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-slide.is-active {
+  display: flex;
 }
 
 /* Issue: this is a <div>, not an <h1> — visually looks like a heading,
@@ -99,13 +139,74 @@ body {
   color: #ffffff;
 }
 
-.hero p {
+.carousel-slide p {
+  color: #ffffff;
+  margin: 0.5rem 0 1.25rem;
+  font-size: 1rem;
+}
+
+/* Issue: same white-on-brand contrast fail as .btn-primary — ~2.6:1
+   (WCAG 1.4.3) — but this button's label is a real, properly announced
+   text node. */
+.btn-view-activities {
+  background: var(--brand-color);
   color: #ffffff;
 }
 
+/* Issue: unlabelled carousel controls — see the HTML comment above them.
+   No focus styling beyond the global outline removal either. */
+.carousel-dots {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.carousel-dot.is-active {
+  background: #ffffff;
+}
+
+/* Issue: same unlabelled-dots bug as the hero carousel, now on every
+   event card too — dots-only, no arrows, no accessible name on any of
+   them (see issue #17). */
+.event-image-carousel {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.event-image-carousel .event-image {
+  display: none;
+  margin-bottom: 0;
+}
+
+.event-image-carousel .event-image.is-active {
+  display: block;
+}
+
+.event-image-carousel .carousel-dot {
+  background: rgba(16, 49, 92, 0.35);
+}
+
+.event-image-carousel .carousel-dot.is-active {
+  background: #10315c;
+}
+
 .btn-primary {
-  background: #D0EC2D;
-  color: #ffffff; /* Issue: ~1.3:1 contrast — fails 1.4.3 */
+  background: var(--brand-color);
+  color: #ffffff; /* Issue: ~2.6:1 contrast — fails 1.4.3 */
 }
 
 /* Issue: heading skips from (missing) h1 straight to h4 (WCAG 1.3.1 / 2.4.6) */
@@ -136,15 +237,15 @@ body {
   background: #e53935;
 }
 
-/* Issue: light olive meta text — ~2.2:1 contrast on white (WCAG 1.4.3) */
+/* Issue: light pink meta text — ~2.1:1 contrast on white (WCAG 1.4.3) */
 .event-meta {
-  color: #8CBF5C;
+  color: #fe83f7;
 }
 
-/* Issue: "Click Here" link text repeated identically on every card —
+/* Issue: "Register" link text repeated identically on every card,
    out of context it tells a screen reader user nothing (WCAG 2.4.4). */
 .event-link {
-  color: #9db8e0;
+  color: var(--brand-color);
   font-size: 0.875rem;
   text-decoration: underline;
 }
@@ -171,26 +272,40 @@ input::placeholder {
 /* Issue: submit is a styled <div onclick>, invisible to keyboard/AT users
    as an actionable control (WCAG 2.1.1 / 4.1.2). */
 .btn-submit {
-  background: #D0EC2D;
-  color: #ffffff; /* ~1.3:1 contrast — fails 1.4.3, same as .btn-primary */
+  background: var(--brand-color);
+  color: #ffffff; /* ~2.6:1 contrast — fails 1.4.3, same as .btn-primary */
 }
 
 .spotlight-quote {
-  color: #8CBF5C; /* Issue: ~2.2:1 contrast (WCAG 1.4.3) */
+  color: #fe83f7; /* Issue: ~2.1:1 contrast (WCAG 1.4.3) */
 }
 
 .news-carousel {
   position: relative;
   overflow: hidden;
-  height: 92px;
+  display: grid;
+}
+
+#news-carousel-dots {
+  position: static;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+#news-carousel-dots .carousel-dot {
+  background: rgba(16, 49, 92, 0.35);
+}
+
+#news-carousel-dots .carousel-dot.is-active {
+  background: #10315c;
 }
 
 .news-item {
-  border: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  border-color: #eaeaea;
+  background: #fff;
+  grid-area: 1 / 1;
   opacity: 0;
   transition: opacity 0.4s;
 }
@@ -201,7 +316,7 @@ input::placeholder {
 
 /* Issue: identical "Read More" link text on every item (WCAG 2.4.4) */
 .news-link {
-  color: #9db8e0;
+  color: var(--brand-color);
   font-size: 0.875rem;
 }
 
@@ -216,8 +331,40 @@ input::placeholder {
   opacity: 0.7;
 }
 
-/* Issue: low-contrast small footer links, ~1.6:1 contrast (WCAG 1.4.3) */
+/* Issue: low-contrast small footer links, ~2.6:1 contrast (WCAG 1.4.3) */
 .footer-links a {
-  color: #b9d98a;
+  color: var(--brand-color);
   text-decoration: none;
+}
+
+/* Issue: looks like a set of radio buttons, but see the HTML comment
+   above them on bad-register.html — no semantics at all, just a CSS
+   class swap on click. */
+.field-heading {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  margin: 0 0 0.5rem;
+  color: #10315c;
+}
+
+.date-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.date-option {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #cccccc;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  color: #10315c;
+}
+
+.date-option.selected {
+  background: var(--brand-color);
+  color: #ffffff;
+  border-color: var(--brand-color);
 }

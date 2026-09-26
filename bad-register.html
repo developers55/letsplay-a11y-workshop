@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - Let's Play</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/bad.css">
+</head>
+<body>
+
+  <div class="site-header">
+    <a href="bad.html"><img class="logo" src="assets/logo_1.svg" alt="logo_1.svg"></a>
+
+    <!-- Issue: now reachable and activatable by keyboard (tabindex +
+         Enter/Space handler), but still just a <div>, no role, no
+         accessible name, no aria-expanded. AT users land on it but get
+         no announcement of what it is or whether it's open (WCAG 4.1.2). -->
+    <div class="hamburger" tabindex="0" onclick="toggleMenu()" onkeydown="handleHamburgerKey(event)">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <section>
+    <h4 class="section-heading">Event Registration</h4>
+
+    <!-- Issue: no real <label> for any field, and nothing on the page
+         indicates which fields are required versus optional — the
+         placeholder text is the only clue to what a field is for, and
+         it disappears the moment you start typing (WCAG 1.3.1 / 3.3.2). -->
+    <form onsubmit="return false;">
+      <div class="form-group">
+        <input type="text" placeholder="Full Name">
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <input type="tel" placeholder="Phone">
+      </div>
+
+      <!-- Issue: styled to look like a group of radio buttons, but
+           these are plain <div>s with an onclick handler — no
+           role="radio", no aria-checked, no fieldset/legend grouping
+           them as one mutually-exclusive set, no name attribute linking
+           them at all. A screen reader gets no indication of which
+           date (if any) is currently selected, or even that picking
+           one should deselect the others (WCAG 4.1.2 / 1.3.1). -->
+      <p class="field-heading">Which date would you like to attend?</p>
+      <div class="date-options">
+        <div class="date-option selected" onclick="selectDate(this)">Tue, 10/3</div>
+        <div class="date-option" onclick="selectDate(this)">Tue, 17/3</div>
+        <div class="date-option" onclick="selectDate(this)">Tue, 24/3</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" onclick="submitForm()">Complete Registration</button>
+    </form>
+  </section>
+
+  <!-- Issue: the actual nav markup lives all the way down here, appended
+       to the end of the DOM (a common real cause of this exact bug: an
+       off-canvas panel moved here for stacking/z-index reasons). Opening
+       it moves nothing: no focus() call anywhere in bad.js, and none of
+       the page content in between is made inert. So tabbing past the
+       hamburger goes straight into the registration form, long before
+       it ever reaches these links (WCAG 2.4.3 Focus Order). -->
+  <ul class="nav-menu is-hidden-offscreen" id="nav-copy-1">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Events</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="#">Contact Us</a></li>
+    <li><a href="#">Login</a></li>
+  </ul>
+
+  <!-- Second copy, left over from an old desktop layout. Nobody ever
+       sees it, but it's not display:none or [hidden], just pushed
+       off-screen, so a screen reader still reads all six links. -->
+  <ul class="nav-menu is-hidden-offscreen" id="nav-copy-2">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Events</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="#">Contact Us</a></li>
+    <li><a href="#">Login</a></li>
+  </ul>
+
+  <script src="js/bad.js"></script>
+</body>
+</html>

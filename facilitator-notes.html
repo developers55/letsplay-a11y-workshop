@@ -84,7 +84,7 @@
     <div class="issue">
       <h2><span class="num">1.</span> Logo image alt text is the filename</h2>
       <dl>
-        <dt>Bad:</dt><dd><code>alt="logo.png"</code> — screen reader announces "logo dot p n g, image," meaningless.</dd>
+        <dt>Bad:</dt><dd><code>alt="logo_1.svg"</code> — screen reader announces "logo underscore one dot s v g, image," meaningless.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.1.1 Non-text Content</span></dd>
         <dt>Fix:</dt><dd><code>alt="Let's Play home"</code> — describes purpose, not filename.</dd>
       </dl>
@@ -129,7 +129,7 @@
     <div class="issue">
       <h2><span class="num">6.</span> Event list has no list semantics — unclear grouping</h2>
       <dl>
-        <dt>Bad:</dt><dd>The three events are just a stack of <code>&lt;div&gt;</code>s, not a <code>&lt;ul&gt;/&lt;li&gt;</code> list. A screen reader never announces "list, 3 items" and gives no boundary between one event's details and the next — combined with the identical "Click Here" links (below), Dennard has no reliable way to tell how many events exist or which date/status belongs to which title.</dd>
+        <dt>Bad:</dt><dd>The three events are just a stack of <code>&lt;div&gt;</code>s, not a <code>&lt;ul&gt;/&lt;li&gt;</code> list. A screen reader never announces "list, 3 items" and gives no boundary between one event's details and the next — combined with the identical "Register" links (below), Dennard has no reliable way to tell how many events exist or which date/status belongs to which title.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.3.1 Info and Relationships</span></dd>
         <dt>Fix:</dt><dd>Real <code>&lt;ul&gt;/&lt;li&gt;</code> markup — AT announces the item count and groups each event's title, status, and link as one unit.</dd>
       </dl>
@@ -163,34 +163,16 @@
     </div>
 
     <div class="issue">
-      <h2><span class="num">10.</span> "Click Here" / "Read More" repeated identically</h2>
+      <h2><span class="num">10.</span> "Register" / "Read More" repeated identically</h2>
       <dl>
         <dt>Bad:</dt><dd>Every event card and news item uses the exact same link text. Out of context (e.g. Dennard's links list), they're indistinguishable.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">2.4.4 Link Purpose (In Context)</span></dd>
-        <dt>Fix:</dt><dd>Each link's visible text names what it leads to, e.g. "View details for Wheelchair Basketball Meetup."</dd>
+        <dt>Fix:</dt><dd>Each link's visible text names what it leads to, e.g. "View details for Tuesday Stadium Run."</dd>
       </dl>
     </div>
 
     <div class="issue">
-      <h2><span class="num">11.</span> Form fields have no real labels</h2>
-      <dl>
-        <dt>Bad:</dt><dd>Only placeholder text ("Name", "Email") — not exposed as an accessible label, and disappears once text is typed.</dd>
-        <dt>WCAG:</dt><dd><span class="wcag">1.3.1 Info and Relationships</span> <span class="wcag">3.3.2 Labels or Instructions</span></dd>
-        <dt>Fix:</dt><dd>A real <code>&lt;label for&gt;</code> for every input, plus visible "(required)"/"(optional)" text — not colour alone.</dd>
-      </dl>
-    </div>
-
-    <div class="issue">
-      <h2><span class="num">12.</span> Submit button is a <code>&lt;div&gt;</code></h2>
-      <dl>
-        <dt>Bad:</dt><dd><code>&lt;div class="btn" onclick&gt;</code> — not reachable by keyboard, not announced as a button.</dd>
-        <dt>WCAG:</dt><dd><span class="wcag">2.1.1 Keyboard</span> <span class="wcag">4.1.2 Name, Role, Value</span></dd>
-        <dt>Fix:</dt><dd>Real <code>&lt;button type="submit"&gt;</code>.</dd>
-      </dl>
-    </div>
-
-    <div class="issue">
-      <h2><span class="num">13.</span> Focus indicator removed site-wide</h2>
+      <h2><span class="num">11.</span> Focus indicator removed site-wide</h2>
       <dl>
         <dt>Bad:</dt><dd><code>* { outline: none; }</code> — even the links/inputs that <em>are</em> keyboard-focusable show no visible focus state.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">2.4.7 Focus Visible</span></dd>
@@ -199,7 +181,7 @@
     </div>
 
     <div class="issue">
-      <h2><span class="num">14.</span> Photo alt text is the filename</h2>
+      <h2><span class="num">12.</span> Photo alt text is the filename</h2>
       <dl>
         <dt>Bad:</dt><dd><code>alt="IMG_2041.jpg"</code> on the athlete spotlight photo.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.1.1 Non-text Content</span></dd>
@@ -208,16 +190,16 @@
     </div>
 
     <div class="issue">
-      <h2><span class="num">15.</span> Auto-advancing news carousel with no pause control</h2>
+      <h2><span class="num">13.</span> Auto-advancing news carousel with no pause control</h2>
       <dl>
-        <dt>Bad:</dt><dd>Rotates every 3 seconds via JS, forever, with no way to pause, stop, or hide it.</dd>
-        <dt>WCAG:</dt><dd><span class="wcag">2.2.2 Pause, Stop, Hide</span></dd>
+        <dt>Bad:</dt><dd>Rotates every 1.2 seconds via JS, forever, with no way to pause, stop, or hide it. It now has slide-picker dots too, but they're bare <code>&lt;button&gt;</code>s with no text, <code>aria-label</code>, or <code>aria-current</code>, and picking one by hand doesn't pause the rotation either — it gets yanked to the next item a moment later regardless.</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">2.2.2 Pause, Stop, Hide</span> <span class="wcag">4.1.2 Name, Role, Value</span></dd>
         <dt>Fix:</dt><dd>Replaced with a simple static list — the safest fix when a carousel isn't essential to the content.</dd>
       </dl>
     </div>
 
     <div class="issue">
-      <h2><span class="num">16.</span> Icon-only footer links with no accessible name</h2>
+      <h2><span class="num">14.</span> Icon-only footer links with no accessible name</h2>
       <dl>
         <dt>Bad:</dt><dd>Social links are real Facebook/Instagram/YouTube logo icons (inline SVG), but with no <code>&lt;title&gt;</code> in the icon and no <code>aria-label</code> on the link — a screen reader announces three bare, identical "link"s with no way to tell them apart.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">4.1.2 Name, Role, Value</span> <span class="wcag">2.4.4 Link Purpose</span></dd>
@@ -226,20 +208,56 @@
     </div>
 
     <div class="issue">
-      <h2><span class="num">17.</span> Opening the menu never moves focus into it</h2>
+      <h2><span class="num">15.</span> Opening the menu never moves focus into it</h2>
       <dl>
-        <dt>Bad:</dt><dd>The menu opens as a fixed overlay on top of the rest of the page, but <code>toggleMenu()</code> never calls <code>.focus()</code> on anything, and none of the underlying content is made inert. The nav markup itself is appended at the very end of the DOM (a common real cause of this bug — an off-canvas panel moved there for stacking/z-index reasons). So the next Tab after the hamburger goes straight into the hero, events, form, and everything else the panel is visually covering, long before it ever reaches the menu links sitting at the bottom of the page.</dd>
+        <dt>Bad:</dt><dd>The menu opens as a fixed overlay on top of the rest of the page, but <code>toggleMenu()</code> never calls <code>.focus()</code> on anything, and none of the underlying content is made inert. The nav markup itself is appended at the very end of the DOM (a common real cause of this bug — an off-canvas panel moved there for stacking/z-index reasons). So the next Tab after the hamburger goes straight into the hero, events, spotlight, and everything else the panel is visually covering, long before it ever reaches the menu links sitting at the bottom of the page.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">2.4.3 Focus Order</span></dd>
         <dt>Fix:</dt><dd>On open, focus deliberately stays on the toggle button — its <code>aria-expanded</code>/<code>aria-label</code> change is announced right there, and because the nav sits immediately after the header in the DOM, the very next Tab moves naturally into the first link. On close, focus explicitly returns to the button in case it had moved further into the menu. See <code>toggleMenu()</code> in good.js.</dd>
       </dl>
     </div>
 
     <div class="issue">
-      <h2><span class="num">18.</span> Hero heading/CTA sit on a photo with no contrast safeguard</h2>
+      <h2><span class="num">16.</span> Hero heading/CTA sit on a photo with no contrast safeguard</h2>
       <dl>
-        <dt>Bad:</dt><dd>The hero banner photo is set as a CSS background on <code>.hero</code>, and the heading, paragraph, and "Join a Session" button are placed directly on top of it. The heading and paragraph were switched to plain white text to read better against the darker parts of the photo — but there's still no scrim/overlay behind them and no actual contrast check against the image, so legibility still depends entirely on which part of the busy photo happens to sit behind each line (white all but disappears over the lighter swirl highlights and the volleyball).</dd>
+        <dt>Bad:</dt><dd>Each hero carousel slide's background photo/gradient is a CSS background on <code>.carousel-slide</code>, and the heading and paragraph are placed directly on top of it in plain white text — no scrim/overlay behind them, no actual contrast check against what's underneath. Legibility depends entirely on which part of the busy photo (or which gradient) happens to sit behind each line.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.4.3 Contrast (Minimum)</span></dd>
         <dt>Fix:</dt><dd>The photo is a plain content <code>&lt;img&gt;</code> above the text, not behind it — heading/paragraph sit on the page's normal light background afterward, so contrast is unaffected by the image entirely.</dd>
+      </dl>
+    </div>
+
+    <div class="issue">
+      <h2><span class="num">17.</span> Hero carousel never stops, and its controls aren't labelled</h2>
+      <dl>
+        <dt>Bad:</dt><dd>The hero banner is now itself a 3-slide auto-advancing carousel — same missing pause/stop control as the news carousel further down (see issue #13), except this is the very first thing on the page and doesn't respect <code>prefers-reduced-motion</code> either. Navigation is dots-only (no arrows), and the three slide-picker dots are bare <code>&lt;button&gt;</code> elements with no text, no <code>aria-label</code>, and no <code>aria-current</code> on the active dot — a screen reader announces all three identically as bare "button", with no way to tell which dot goes to which slide. Picking a slide manually doesn't even pause the auto-advance — it gets yanked to the next slide 3.5s later regardless. Each event card now has its own small image carousel too, same dots-only pattern, same bare, unlabelled <code>&lt;button&gt;</code> dots.</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">2.2.2 Pause, Stop, Hide</span> <span class="wcag">4.1.2 Name, Role, Value</span></dd>
+        <dt>Fix:</dt><dd>Not yet built in good.html — the hero stays a single static image with real, labelled content, sidestepping both problems the way issue #16's fix already does.</dd>
+      </dl>
+    </div>
+
+    <div class="issue">
+      <h2><span class="num">18.</span> Event card and news images have no <code>alt</code> attribute at all</h2>
+      <dl>
+        <dt>Bad:</dt><dd>Every event card and news item now has a placeholder image, but none of them have an <code>alt</code> attribute — not even <code>alt=""</code>, it's just missing entirely. A browser falls back to announcing the raw <code>src</code> to a screen reader instead of nothing, which is arguably worse than a bad filename alt (issues #1 and #12).</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">1.1.1 Non-text Content</span></dd>
+        <dt>Fix:</dt><dd>Since these are purely decorative placeholders that add no information beyond the title next to them, the fix is <code>alt=""</code> on every one — explicitly marking them decorative so a screen reader skips them entirely, rather than describing a plain coloured rectangle.</dd>
+      </dl>
+    </div>
+
+    <div class="issue">
+      <h2><span class="num">19.</span> Registration form fields have no labels, and nothing shows what's required</h2>
+      <dl>
+        <dt>Bad:</dt><dd>New page: <code>bad-register.html</code>, linked from every event card's "Register" button. Full Name, Email, Phone, and Number of Participants are all placeholder-only — no real <code>&lt;label&gt;</code> for any of them, and nothing on the page indicates which fields are required versus optional at all.</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">1.3.1 Info and Relationships</span> <span class="wcag">3.3.2 Labels or Instructions</span></dd>
+        <dt>Fix:</dt><dd>Not yet built — a <code>good-register.html</code> is planned, matching the bad/good pairing every other page on the site already has.</dd>
+      </dl>
+    </div>
+
+    <div class="issue">
+      <h2><span class="num">20.</span> Date picker looks like radio buttons but has no semantics at all</h2>
+      <dl>
+        <dt>Bad:</dt><dd>Same page — three date options ("Tue, 10/3" etc.) styled to look like a radio group, but built as plain <code>&lt;div&gt;</code>s with an onclick handler that swaps a CSS class. No <code>role="radio"</code>, no <code>aria-checked</code>, no <code>fieldset</code>/<code>legend</code> grouping them, no <code>name</code> attribute linking them at all. A screen reader gets no indication of which date is currently selected, or even that picking one should deselect the others. (Inspired by real feedback: not being able to tell which date had actually been selected was one of the most disorienting parts of testing a site like this.)</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">4.1.2 Name, Role, Value</span> <span class="wcag">1.3.1 Info and Relationships</span></dd>
+        <dt>Fix:</dt><dd>Not yet built — planned for <code>good-register.html</code>.</dd>
       </dl>
     </div>
 
