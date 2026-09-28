@@ -118,7 +118,16 @@
         </div>
         <p class="event-meta">Wed, 6/8, 13/8, 20/8 &middot; 6:00 &ndash; 7:00 PM &middot; Rhu Point Lookout</p>
         <p class="event-desc">Gentle, accessible yoga as the sun goes down. Suitable for complete beginners, no flexibility required. Mats and props are provided, just bring a water bottle.</p>
-        <a href="bad-register.html?event=wednesday-sunset-yoga" class="btn btn-primary">Register</a>
+        <!-- Issue: greyed out and click is blocked with onclick="return
+             false" — but that's a purely visual/behavioural fix, not an
+             accessible one. No aria-disabled, no role change, nothing
+             for AT at all. A screen reader still announces this as an
+             ordinary, enabled "Register" link (it just silently refuses
+             to navigate when activated, mouse or keyboard alike), with
+             zero indication anywhere (not even visible text, unlike the
+             status dot's title-only "Fully booked") of why nothing
+             happens (WCAG 4.1.2 / 1.3.1 / 3.3.1). -->
+        <a href="bad-register.html?event=wednesday-sunset-yoga" class="btn btn-primary is-disabled-look" onclick="return false;">Register</a>
       </div>
 
       <div class="event-card" onclick="location.href='#'">
