@@ -206,6 +206,10 @@ body {
   background: #fff;
 }
 
+.spotlight-card img {
+  box-shadow: 5px 5px 0 0 #febd00;
+}
+
 /* Issue: status conveyed by colour alone, no text/icon (WCAG 1.4.1),
    and red/green are close together on the protanopia/deuteranopia
    confusion line. */
@@ -254,6 +258,63 @@ input::placeholder {
 /* Issue: required-field marker is colour-only, ~2.9:1 (WCAG 1.4.1 / 1.4.3) */
 .required-mark {
   color: #e59aab;
+}
+
+.puzzle-track {
+  position: relative;
+  height: 44px;
+  border-radius: 8px;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.puzzle-track.is-verified {
+  background: #d7f4e3;
+}
+
+.puzzle-track-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999999;
+  font-size: 0.875rem;
+  pointer-events: none;
+}
+
+.puzzle-track-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 44px;
+  background: rgba(0, 170, 248, 0.15);
+}
+
+.puzzle-piece {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: var(--brand-color);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: grab;
+  touch-action: none;
+}
+
+/* Issue: purely cosmetic — no real `disabled` attribute, so a screen
+   reader announces this as a completely normal, enabled button the
+   whole time it's greyed out. */
+.is-disabled-look {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Issue: submit is a styled <div onclick>, invisible to keyboard/AT users
@@ -311,11 +372,16 @@ input::placeholder {
   background: #fe83f7;
 }
 
-/* Issue: icon-only social links, no accessible name (WCAG 4.1.2 / 2.4.4) —
-   the icons below have no <title>, and their links have no aria-label. */
+/* Issue: icon-only social links, no accessible name (WCAG 4.1.2 / 2.4.4).
+   Also no padding/min-size on the link itself, so the clickable area is
+   exactly the icon's own size — 14x14px, well under the 24x24px minimum
+   (WCAG 2.5.8 Target Size Minimum) and nowhere near the 44x44px
+   recommendation (2.5.5), a real problem for anyone with limited fine
+   motor control tapping on a touchscreen. */
 .social-icon {
+  width: 14px;
+  height: 14px;
   fill: #ffffff;
-  opacity: 0.7;
 }
 
 /* Issue: low-contrast small footer links, ~2.6:1 contrast (WCAG 1.4.3) */

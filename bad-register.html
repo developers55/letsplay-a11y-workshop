@@ -35,10 +35,10 @@
          it disappears the moment you start typing (WCAG 1.3.1 / 3.3.2). -->
     <form onsubmit="return false;">
       <div class="form-group">
-        <input type="text" placeholder="Full Name">
+        <input type="text" placeholder="Full Name *">
       </div>
       <div class="form-group">
-        <input type="email" placeholder="Email">
+        <input type="email" placeholder="Email *">
       </div>
       <div class="form-group">
         <input type="tel" placeholder="Phone">
@@ -70,7 +70,34 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary" onclick="submitForm()">Complete Registration</button>
+      <!-- Issue: a drag-only slider "captcha" — no role="slider", no
+           aria-valuenow/min/max, no accessible name, and no keydown
+           handler at all (not even a tabindex). A mouse or touchscreen
+           user can drag it; a keyboard-only or screen reader user has no
+           way to interact with it whatsoever, so they can't get past this
+           step to submit the form at all (WCAG 2.1.1 Keyboard, 4.1.2
+           Name, Role, Value). -->
+      <div class="form-group">
+        <p class="field-heading">Verify you're human</p>
+        <div class="puzzle-track" id="puzzle-track">
+          <span class="puzzle-track-label">Slide to verify</span>
+          <div class="puzzle-track-fill"></div>
+          <div class="puzzle-piece" id="puzzle-piece">&raquo;</div>
+        </div>
+      </div>
+
+      <!-- Issue: looks disabled (greyed out, not-allowed cursor) until the
+           slider above is completed, but there's no real `disabled`
+           attribute — it's a completely normal, fully focusable, fully
+           "enabled" button to a screen reader the whole time. Clicking it
+           before verifying does nothing at all: no error message, no
+           explanation, total silence (WCAG 3.3.1 Error Identification on
+           top of the slider's own 2.1.1/4.1.2 issues) — and since the
+           slider can't be completed by keyboard at all, a keyboard-only
+           user is completely locked out of registering, full stop. -->
+      <button type="submit" class="btn btn-primary is-disabled-look" id="submit-btn" onclick="submitForm()">Complete Registration</button>
+
+      <p class="required-mark">* = required</p>
     </form>
   </section>
 

@@ -42,10 +42,20 @@ function toggleCheckbox(el) {
   el.classList.toggle('checked');
 }
 
+// Issue: silently does nothing if the slider hasn't been dragged to the
+// end — no error message, no explanation, nothing at all. A keyboard-only
+// user, who could never drag the slider in the first place, clicks this
+// button and gets total silence every time (WCAG 3.3.1 Error Identification).
+//
 // Issue: shows the toast, but it's just a class toggle on a plain
 // <div> — no role="status"/aria-live, so a screen reader never hears
 // that submission succeeded (WCAG 4.1.3 Status Messages).
 function submitForm() {
+  var track = document.getElementById('puzzle-track');
+  if (track && !track.classList.contains('is-verified')) {
+    return;
+  }
+
   var toast = document.getElementById('toast');
   if (toast) {
     toast.classList.add('show');
@@ -131,3 +141,50 @@ window.selectDate = function (el) {
   }
   el.classList.add('selected');
 };
+
+// bad-register.html — Issue: pointerdown/pointermove/pointerup only,
+// nothing else. No keydown handler, no tabindex, no role="slider", no
+// aria-valuenow/min/max/text. A mouse or touchscreen user can drag the
+// piece across; a keyboard-only or screen reader user has no way to
+// interact with this control at all.
+(function () {
+  var piece = document.getElementById('puzzle-piece');
+  if (!piece) return;
+
+  var track = document.getElementById('puzzle-track');
+  var fill = track.querySelector('.puzzle-track-fill');
+  var label = track.querySelector('.puzzle-track-label');
+  var submitBtn = document.getElementById('submit-btn');
+  var dragging = false;
+  var maxX = track.clientWidth - piece.clientWidth - 4;
+
+  function setX(x) {
+    x = Math.max(0, Math.min(maxX, x));
+    piece.style.left = x + 'px';
+    fill.style.width = (x + piece.clientWidth) + 'px';
+    if (x >= maxX - 2) {
+      track.classList.add('is-verified');
+      label.textContent = 'Verified';
+      piece.textContent = '✓';
+      if (submitBtn) submitBtn.classList.remove('is-disabled-look');
+    } else {
+      track.classList.remove('is-verified');
+      label.textContent = 'Slide to verify';
+      piece.textContent = '»';
+      if (submitBtn) submitBtn.classList.add('is-disabled-look');
+    }
+  }
+
+  piece.addEventListener('pointerdown', function (e) {
+    dragging = true;
+    piece.setPointerCapture(e.pointerId);
+  });
+  piece.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var rect = track.getBoundingClientRect();
+    setX(e.clientX - rect.left - piece.clientWidth / 2);
+  });
+  piece.addEventListener('pointerup', function () {
+    dragging = false;
+  });
+})();

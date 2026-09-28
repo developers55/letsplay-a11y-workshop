@@ -107,6 +107,10 @@ input:focus-visible {
   background: #1a1830;
 }
 
+.hero img {
+  box-shadow: 5px 5px 0 0 #f78fc9;
+}
+
 /* Fix: base.css's shared section background classes (events-section,
    spotlight-section, news-section) are light-mode tints — override them
    here to dark equivalents so heading/body text stays legible. */
@@ -141,6 +145,10 @@ input:focus-visible {
 .event-card {
   border-color: #3a3560;
   background: #252140;
+}
+
+.spotlight-card img {
+  box-shadow: 5px 5px 0 0 #febd00;
 }
 
 /* Fix: status is an icon + visible text label, not colour alone, and the

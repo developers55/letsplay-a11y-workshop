@@ -237,16 +237,16 @@
     <div class="issue">
       <h2><span class="num">18.</span> Event card and news images have no <code>alt</code> attribute at all</h2>
       <dl>
-        <dt>Bad:</dt><dd>Every event card and news item now has a placeholder image, but none of them have an <code>alt</code> attribute — not even <code>alt=""</code>, it's just missing entirely. A browser falls back to announcing the raw <code>src</code> to a screen reader instead of nothing, which is arguably worse than a bad filename alt (issues #1 and #12).</dd>
+        <dt>Bad:</dt><dd>Every event card and news item has a real licensed photo now, but none of them have an <code>alt</code> attribute — not even <code>alt=""</code>, it's just missing entirely. A browser falls back to announcing the raw <code>src</code> to a screen reader instead of nothing, which is arguably worse than a bad filename alt (issues #1 and #12) — and unlike a plain placeholder rectangle, these photos genuinely carry information a screen reader user is missing entirely (which sport, which venue, who's in it).</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.1.1 Non-text Content</span></dd>
-        <dt>Fix:</dt><dd>Since these are purely decorative placeholders that add no information beyond the title next to them, the fix is <code>alt=""</code> on every one — explicitly marking them decorative so a screen reader skips them entirely, rather than describing a plain coloured rectangle.</dd>
+        <dt>Fix:</dt><dd>Real, descriptive <code>alt</code> text on every image in <code>good.html</code>, matching what's actually in each photo (e.g. "A wheelchair racing athlete in a helmet and racing wheelchair on an athletics track") rather than the event title already sitting next to it in visible text — a screen reader user gets the same picture a sighted user does, not just a repeat of the heading.</dd>
       </dl>
     </div>
 
     <div class="issue">
       <h2><span class="num">19.</span> Registration form fields have no labels, and nothing shows what's required</h2>
       <dl>
-        <dt>Bad:</dt><dd>New page: <code>bad-register.html</code>, linked from every event card's "Register" button. Full Name, Email, Phone, and Number of Participants are all placeholder-only — no real <code>&lt;label&gt;</code> for any of them, and nothing on the page indicates which fields are required versus optional at all.</dd>
+        <dt>Bad:</dt><dd>New page: <code>bad-register.html</code>, linked from every event card's "Register" button. Full Name, Email, and Phone are all placeholder-only — no real <code>&lt;label&gt;</code> for any of them. Required fields get a bare "*" appended to the placeholder, explained by a "* = required" line sitting on its own at the bottom of the form — the asterisk isn't programmatically tied to the fields it marks (no <code>aria-required</code>, no <code>required</code> attribute, not even adjacent text), so the association only exists visually, and vanishes from each field entirely the moment its placeholder disappears on input.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.3.1 Info and Relationships</span> <span class="wcag">3.3.2 Labels or Instructions</span></dd>
         <dt>Fix:</dt><dd><code>good-register.html</code> — every field has a real <code>&lt;label&gt;</code> linked via <code>for</code>/<code>id</code>, and required vs. optional is called out in visible text right in the label (not colour alone), so it's exposed to a screen reader and doesn't disappear once a value is typed.</dd>
       </dl>
@@ -285,6 +285,15 @@
         <dt>Bad:</dt><dd>Each event card's meta line ("Tue, 10/3, 17/3, 24/3 &middot; 6:30 &ndash; 7:30 AM &middot; Stadium Waterfront Promenade") uses a literal middle-dot character as a visual separator with no markup hiding it from assistive tech, so a screen reader speaks it aloud as punctuation ("dot") between every segment.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.1.1 Non-text Content</span> <span class="wcag">1.3.1 Info and Relationships</span></dd>
         <dt>Fix:</dt><dd><code>good.html</code> rewrites the whole line as one flowing sentence with no separators to hide at all: "Tuesdays, 10, 17 and 24 Mar, 6:30 to 7:30 AM, at Stadium Waterfront Promenade" — no <code>&lt;time&gt;</code> fragments, no middle dots, nothing for a screen reader to stumble on. <code>good-register.html</code>'s per-event line is built from shared date/time/location data rather than hand-written, so it keeps the dense, dotted format for sighted users and pairs it with a <code>&lt;span aria-hidden="true"&gt;</code> / sibling <code>.sr-only</code> spoken equivalent instead.</dd>
+      </dl>
+    </div>
+
+    <div class="issue">
+      <h2><span class="num">24.</span> "Verify you're human" is a drag-only slider with no keyboard path at all</h2>
+      <dl>
+        <dt>Bad:</dt><dd><code>bad-register.html</code> — a bot-check slider styled to look like a puzzle piece you drag across a track. It's built entirely on <code>pointerdown</code>/<code>pointermove</code>/<code>pointerup</code>: no <code>role="slider"</code>, no <code>aria-valuenow</code>/<code>min</code>/<code>max</code>, no accessible name, and critically no <code>keydown</code> handler or even a <code>tabindex</code> — a mouse or touchscreen user can drag it, but a keyboard-only or screen reader user has no way to interact with it whatsoever. Worse, "Complete Registration" is greyed out (CSS <code>opacity</code>/<code>cursor</code> only, no real <code>disabled</code> attribute) until the slider is completed, so a screen reader still announces it as a perfectly normal, enabled button — clicking it does nothing at all, silently, with zero error message or explanation. A keyboard-only user is completely locked out of registering, full stop.</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">2.1.1 Keyboard</span> <span class="wcag">4.1.2 Name, Role, Value</span> <span class="wcag">3.3.1 Error Identification</span></dd>
+        <dt>Fix:</dt><dd><code>good-register.html</code> swaps it for a Cloudflare Turnstile widget — non-interactive for most visitors (a background check, nothing to drag or click), and on the rare occasion it does need interaction, that's a single labelled, keyboard-operable checkbox rather than a puzzle. Turnstile is WCAG 2.2 AA-compliant. This demo uses Cloudflare's public, non-secret test site key (<code>1x00000000000000000000AA</code>, documented to always pass on any hostname) since this static site has no backend to verify a real token against — same limitation as the rest of the registration flow, which doesn't submit anywhere either. "Complete Registration" stays a plain, always-enabled button throughout.</dd>
       </dl>
     </div>
 

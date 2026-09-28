@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/good.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -92,6 +93,19 @@
         <div class="form-group checkbox-group">
           <input type="checkbox" id="agree" name="agree" required>
           <label for="agree">I agree to the Terms and Conditions <span class="hint">(required)</span></label>
+        </div>
+
+        <!-- Fix: a Cloudflare Turnstile widget in place of the drag-only
+             slider — it's non-interactive for most visitors (a background
+             check, nothing to drag or click at all), and on the rare
+             occasion it does need interaction, that's a single labelled,
+             keyboard-operable checkbox rather than a puzzle (WCAG 2.1.1 /
+             4.1.2). This demo uses Cloudflare's public, non-secret test
+             site key (always passes, works on any hostname including
+             localhost) since this static site has no backend to verify
+             a real token against. -->
+        <div class="form-group">
+          <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA"></div>
         </div>
 
         <button type="submit" class="btn btn-primary primary-fill">Complete Registration</button>
