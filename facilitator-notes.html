@@ -102,7 +102,7 @@
     <div class="issue">
       <h2><span class="num">3.</span> Hamburger menu is a <code>&lt;div&gt;</code>, not a button</h2>
       <dl>
-        <dt>Bad:</dt><dd>A styled <code>&lt;div&gt;</code> with a <code>tabindex</code> and a keydown handler bolted on, so it's reachable and activatable by keyboard — but it's still not a real button: no announced role, no accessible name, no <code>aria-expanded</code> state. A screen reader lands on it and gets nothing meaningful.</dd>
+        <dt>Bad:</dt><dd>A styled <code>&lt;div&gt;</code> with <code>role="button"</code>, a <code>tabindex</code>, and a keydown handler bolted on — enough that AT actually stops on it (both Tab and swipe/linear navigation), so Dennard can still reach and open it. But it's still not a real button: no accessible name, no <code>aria-expanded</code> state. It announces as bare "button", with no clue what it does or whether it's currently open.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">4.1.2 Name, Role, Value</span></dd>
         <dt>Fix:</dt><dd>Real <code>&lt;button&gt;</code> with <code>aria-expanded</code>, <code>aria-controls</code>, and a descriptive <code>aria-label</code>.</dd>
       </dl>
@@ -140,7 +140,7 @@
       <dl>
         <dt>Bad:</dt><dd>"Spots available" vs "Fully booked" is shown only as a small red or green dot — invisible to a screen reader, and the red/green pairing sits on the confusion line for the most common forms of colour vision deficiency.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.4.1 Use of Color</span></dd>
-        <dt>Fix:</dt><dd>Icon <em>and</em> visible text label ("&#9679; Spots available"), each with sufficient contrast on its own badge background.</dd>
+        <dt>Fix:</dt><dd>Icon <em>and</em> visible text label ("&#9679; Spots available"), each with sufficient contrast on its own badge background. The dot itself is wrapped in <code>&lt;span aria-hidden="true"&gt;</code> — it's purely decorative once the text label is there, and without hiding it a screen reader announces "black circle Spots available" on every card.</dd>
       </dl>
     </div>
 
@@ -248,7 +248,7 @@
       <dl>
         <dt>Bad:</dt><dd>New page: <code>bad-register.html</code>, linked from every event card's "Register" button. Full Name, Email, Phone, and Number of Participants are all placeholder-only — no real <code>&lt;label&gt;</code> for any of them, and nothing on the page indicates which fields are required versus optional at all.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.3.1 Info and Relationships</span> <span class="wcag">3.3.2 Labels or Instructions</span></dd>
-        <dt>Fix:</dt><dd>Not yet built — a <code>good-register.html</code> is planned, matching the bad/good pairing every other page on the site already has.</dd>
+        <dt>Fix:</dt><dd><code>good-register.html</code> — every field has a real <code>&lt;label&gt;</code> linked via <code>for</code>/<code>id</code>, and required vs. optional is called out in visible text right in the label (not colour alone), so it's exposed to a screen reader and doesn't disappear once a value is typed.</dd>
       </dl>
     </div>
 
@@ -257,7 +257,34 @@
       <dl>
         <dt>Bad:</dt><dd>Same page — three date options ("Tue, 10/3" etc.) styled to look like a radio group, but built as plain <code>&lt;div&gt;</code>s with an onclick handler that swaps a CSS class. No <code>role="radio"</code>, no <code>aria-checked</code>, no <code>fieldset</code>/<code>legend</code> grouping them, no <code>name</code> attribute linking them at all. A screen reader gets no indication of which date is currently selected, or even that picking one should deselect the others. (Inspired by real feedback: not being able to tell which date had actually been selected was one of the most disorienting parts of testing a site like this.)</dd>
         <dt>WCAG:</dt><dd><span class="wcag">4.1.2 Name, Role, Value</span> <span class="wcag">1.3.1 Info and Relationships</span></dd>
-        <dt>Fix:</dt><dd>Not yet built — planned for <code>good-register.html</code>.</dd>
+        <dt>Fix:</dt><dd><code>good-register.html</code> — a real <code>&lt;fieldset&gt;</code>/<code>&lt;legend&gt;</code> group of native, fully visible radio buttons sharing one <code>name</code>, each linked to its own <code>&lt;label&gt;</code>. A screen reader announces the group label ("Select the date you would like to attend"), how many options there are, and which one is checked; the browser handles the visual checked state, focus ring, and arrow-key navigation for free, no JS or custom styling required.</dd>
+      </dl>
+    </div>
+
+    <div class="issue">
+      <h2><span class="num">21.</span> "I agree to Terms and Conditions" checkbox has no checkbox semantics</h2>
+      <dl>
+        <dt>Bad:</dt><dd>Same page — styled to look like a checkbox, but it's a plain <code>&lt;div&gt;</code> with an onclick handler that swaps a CSS class. No real <code>&lt;input type="checkbox"&gt;</code>, no <code>role="checkbox"</code>, no <code>aria-checked</code>. A screen reader has no way to tell whether it's checked, unchecked, or even that it's a control at all.</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">4.1.2 Name, Role, Value</span></dd>
+        <dt>Fix:</dt><dd><code>good-register.html</code> — a real <code>&lt;input type="checkbox"&gt;</code> with a linked <code>&lt;label&gt;</code>. A screen reader announces "checkbox, not checked" and the state updates as it's toggled, none of which a styled <code>&lt;div&gt;</code> can do on its own.</dd>
+      </dl>
+    </div>
+
+    <div class="issue">
+      <h2><span class="num">22.</span> Submission confirmation is a silent toast</h2>
+      <dl>
+        <dt>Bad:</dt><dd>Same page — submitting the form shows a toast ("Registration submitted!"), but it's just a plain <code>&lt;div&gt;</code> whose visibility is toggled by a CSS class, with no <code>role="status"</code> or <code>aria-live</code> region at all. A sighted user gets clear visual confirmation; a screen reader user hears nothing and has no idea whether the submission worked.</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">4.1.3 Status Messages</span></dd>
+        <dt>Fix:</dt><dd><code>good-register.html</code> — the confirmation text lands in a <code>role="status"</code>/<code>aria-live="polite"</code> region instead of a plain toggled <code>&lt;div&gt;</code>. A screen reader announces it the moment it's set, the same instant a sighted user sees it appear.</dd>
+      </dl>
+    </div>
+
+    <div class="issue">
+      <h2><span class="num">23.</span> Event date/time line reads as fragmented, punctuation-cluttered noise</h2>
+      <dl>
+        <dt>Bad:</dt><dd>Each event card's meta line ("Tue, 10/3, 17/3, 24/3 &middot; 6:30 &ndash; 7:30 AM &middot; Stadium Waterfront Promenade") uses a literal middle-dot character as a visual separator with no markup hiding it from assistive tech, so a screen reader speaks it aloud as punctuation ("dot") between every segment.</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">1.1.1 Non-text Content</span> <span class="wcag">1.3.1 Info and Relationships</span></dd>
+        <dt>Fix:</dt><dd><code>good.html</code> rewrites the whole line as one flowing sentence with no separators to hide at all: "Tuesdays, 10, 17 and 24 Mar, 6:30 to 7:30 AM, at Stadium Waterfront Promenade" — no <code>&lt;time&gt;</code> fragments, no middle dots, nothing for a screen reader to stumble on. <code>good-register.html</code>'s per-event line is built from shared date/time/location data rather than hand-written, so it keeps the dense, dotted format for sighted users and pairs it with a <code>&lt;span aria-hidden="true"&gt;</code> / sibling <code>.sr-only</code> spoken equivalent instead.</dd>
       </dl>
     </div>
 

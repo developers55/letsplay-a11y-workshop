@@ -4,20 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Let's Play</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/bad.css">
 </head>
 <body>
 
   <div class="site-header">
-    <a href="bad.html"><img class="logo" src="assets/logo_1.svg" alt="logo_1.svg"></a>
+    <div class="header-bar">
+      <a href="bad.html"><img class="logo" src="assets/logo_1.svg" alt="logo_1.svg"></a>
 
-    <!-- Issue: now reachable and activatable by keyboard (tabindex +
-         Enter/Space handler), but still just a <div>, no role, no
-         accessible name, no aria-expanded. AT users land on it but get
-         no announcement of what it is or whether it's open (WCAG 4.1.2). -->
-    <div class="hamburger" tabindex="0" onclick="toggleMenu()" onkeydown="handleHamburgerKey(event)">
-      <span></span><span></span><span></span>
+      <!-- Issue: reachable and activatable by keyboard (tabindex +
+           Enter/Space handler), and role="button" makes AT stop on it
+           during swipe/linear navigation too — but there's still no
+           accessible name and no aria-expanded. A screen reader announces
+           it as bare "button", with no clue what it does or whether it's
+           open (WCAG 4.1.2). -->
+      <div class="hamburger" role="button" tabindex="0" onclick="toggleMenu()" onkeydown="handleHamburgerKey(event)">
+        <span class="material-icons-round hamburger-icon" aria-hidden="true">menu</span>
+      </div>
     </div>
   </div>
 
@@ -58,7 +63,7 @@
     </div>
   </div>
 
-  <section>
+  <section class="events-section">
     <h4 class="section-heading">Upcoming Events</h4>
     <!-- Issue: no list semantics. This "list" of events is just a stack
          of <div>s, a screen reader never announces "list, 3 items" or
@@ -90,7 +95,7 @@
              "fourteen slash three" instead of a date, and day/month order
              is locale-ambiguous (is 4/3 April 3rd or March 4th?). Stacking
              three of them in a row makes it worse, not better. -->
-        <p class="event-meta">Tue, 10/3, 17/3, 24/3 &middot; Stadium Waterfront Promenade</p>
+        <p class="event-meta">Tue, 10/3, 17/3, 24/3 &middot; 6:30 &ndash; 7:30 AM &middot; Stadium Waterfront Promenade</p>
         <p class="event-desc">An easy-paced group run along the waterfront, great for building a weekly habit. All paces welcome, and the group regroups every kilometre. Meet at the main entrance; bring water and comfortable shoes.</p>
         <a href="bad-register.html" class="btn btn-primary">Register</a>
       </div>
@@ -108,7 +113,7 @@
           <div class="event-title">Wednesday Sunset Yoga</div>
           <span class="status-dot red" title="Fully booked"></span>
         </div>
-        <p class="event-meta">Wed, 11/3, 18/3, 25/3 &middot; Rhu Point Lookout</p>
+        <p class="event-meta">Wed, 11/3, 18/3, 25/3 &middot; 6:00 &ndash; 7:00 PM &middot; Rhu Point Lookout</p>
         <p class="event-desc">Gentle, accessible yoga as the sun goes down. Suitable for complete beginners, no flexibility required. Mats and props are provided, just bring a water bottle.</p>
         <a href="bad-register.html" class="btn btn-primary">Register</a>
       </div>
@@ -126,7 +131,7 @@
           <div class="event-title">Saturday Reservoir Run</div>
           <span class="status-dot green" title="Spots available"></span>
         </div>
-        <p class="event-meta">Sat, 14/3, 21/3, 28/3 &middot; Serangoon Reservoir</p>
+        <p class="event-meta">Sat, 14/3, 21/3, 28/3 &middot; 8:00 &ndash; 9:00 AM &middot; Serangoon Reservoir</p>
         <p class="event-desc">A scenic loop around the water, open to walkers, joggers, and runners alike. Choose your own pace and distance, and turn back whenever you like. Meet at the boathouse car park.</p>
         <a href="bad-register.html" class="btn btn-primary">Register</a>
       </div>
@@ -142,7 +147,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="news-section">
     <h4 class="section-heading">Latest News</h4>
     <div class="news-carousel" id="news-carousel">
       <div class="news-item is-active">
@@ -178,6 +183,8 @@
   </section>
 
   <div class="site-footer">
+    <a href="bad.html"><img class="logo footer-logo" src="assets/logo_1-invert2.svg" alt="logo_1-invert2.svg"></a>
+
     <!-- Issue: icon-only links with no accessible name anywhere, no
          aria-label on the link, no <title> in the icon. A screen reader
          announces these as bare, indistinguishable "link"s. -->

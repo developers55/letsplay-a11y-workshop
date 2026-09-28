@@ -4,41 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Let's Play</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/good.css">
 </head>
 <body>
 
-  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="#main" class="skip-link primary-fill">Skip to main content</a>
 
+  <!-- Fix: the primary nav is nested inside <header>, not a sibling
+       after it — the hamburger toggle and the menu it opens now read as
+       one "banner" landmark to a screen reader, instead of the nav
+       announcing as a separate landmark right after "end of banner". -->
   <header class="site-header">
-    <a href="good.html"><img class="logo" src="assets/logo_1.svg" alt="Let's Play home"></a>
+    <div class="header-bar">
+      <a href="good.html"><img class="logo" src="assets/logo_1-invert.svg" alt="Let's Play home"></a>
 
-    <button type="button" class="hamburger-btn" id="menu-btn" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu" onclick="toggleMenu()">
-      <span></span>
-    </button>
+      <button type="button" class="hamburger-btn" id="menu-btn" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu" onclick="toggleMenu()">
+        <span class="material-icons-round hamburger-icon" aria-hidden="true">menu</span>
+      </button>
+    </div>
+
+    <!-- A single nav in the DOM. When closed it carries the `hidden`
+         attribute, so it is completely removed from the accessibility
+         tree, nothing left for a screen reader to trip over. -->
+    <nav id="primary-nav" class="nav-menu" hidden aria-label="Primary">
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.9rem;">
+        <li><a href="#">Home</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Login</a></li>
+        <!-- Fix: a close control at the end of the menu, so a keyboard/AT
+             user who has tabbed through every link can close the menu right
+             there instead of tabbing/shifting all the way back up to the
+             hamburger button. Visually hidden until it receives focus (same
+             technique as .skip-link above) so sighted keyboard users still
+             get a visible focus target, never permanently sr-only. -->
+        <li><button type="button" class="nav-close-btn" onclick="toggleMenu()">Close menu</button></li>
+      </ul>
+    </nav>
   </header>
-
-  <!-- A single nav in the DOM. When closed it carries the `hidden`
-       attribute, so it is completely removed from the accessibility
-       tree, nothing left for a screen reader to trip over. -->
-  <nav id="primary-nav" class="nav-menu" hidden aria-label="Primary">
-    <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.9rem;">
-      <li><a href="#">Home</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">News</a></li>
-      <li><a href="#">Contact Us</a></li>
-      <li><a href="#">Login</a></li>
-      <!-- Fix: a close control at the end of the menu, so a keyboard/AT
-           user who has tabbed through every link can close the menu right
-           there instead of tabbing/shifting all the way back up to the
-           hamburger button. Visually hidden until it receives focus (same
-           technique as .skip-link above) so sighted keyboard users still
-           get a visible focus target, never permanently sr-only. -->
-      <li><button type="button" class="nav-close-btn" onclick="toggleMenu()">Close menu</button></li>
-    </ul>
-  </nav>
 
   <main id="main">
 
@@ -46,10 +53,10 @@
       <img src="images/hero-banner.jpg" alt="Four Para athletes in action: wheelchair badminton, wheelchair basketball, sledge hockey, and sitting volleyball.">
       <h1>Welcome to Let's Play</h1>
       <p>A community sports club for people of all abilities.</p>
-      <a href="#events" class="btn btn-primary">Join a Session</a>
+      <a href="#events" class="btn btn-primary primary-fill">View upcoming events</a>
     </div>
 
-    <section id="events">
+    <section id="events" class="events-section">
       <h2 class="section-heading">Upcoming Events</h2>
       <ul class="event-list">
 
@@ -57,33 +64,43 @@
           <img class="event-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23d7e3f4'/%3E%3C/svg%3E" alt="">
           <div class="event-card-top">
             <h3 class="event-title">Tuesday Stadium Run</h3>
-            <span class="status-badge available">&#9679; Spots available</span>
+            <span class="status-badge available"><span aria-hidden="true">&#9679;</span> Spots available</span>
           </div>
-          <p class="event-meta"><time datetime="2027-03-10">Tue, 10 Mar</time>, <time datetime="2027-03-17">17 Mar</time>, <time datetime="2027-03-24">24 Mar</time> &middot; Stadium Waterfront Promenade</p>
+          <!-- Fix: one flowing sentence instead of three separate <time>
+               elements glued together with middle-dot separators — reads
+               naturally out loud with nothing to hide from AT, instead of
+               needing an aria-hidden visual version plus a separate
+               .sr-only spoken version (WCAG 1.3.1). -->
+          <p class="event-meta">Tuesdays, 10, 17 and 24 Mar, 6:30 to 7:30 AM, at Stadium Waterfront Promenade</p>
           <p class="event-desc">An easy-paced group run along the waterfront, great for building a weekly habit. All paces welcome, and the group regroups every kilometre. Meet at the main entrance; bring water and comfortable shoes.</p>
-          <a href="#" class="btn btn-primary">View details for Tuesday Stadium Run</a>
+          <a href="good-register.html?event=tuesday-stadium-run" class="btn btn-primary primary-fill">Register for Tuesday Stadium Run</a>
         </li>
 
         <li class="event-card">
           <img class="event-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23f4d7e3'/%3E%3C/svg%3E" alt="">
           <div class="event-card-top">
             <h3 class="event-title">Wednesday Sunset Yoga</h3>
-            <span class="status-badge full">&#9679; Fully booked</span>
+            <span class="status-badge full"><span aria-hidden="true">&#9679;</span> Fully booked</span>
           </div>
-          <p class="event-meta"><time datetime="2027-03-11">Wed, 11 Mar</time>, <time datetime="2027-03-18">18 Mar</time>, <time datetime="2027-03-25">25 Mar</time> &middot; Rhu Point Lookout</p>
+          <p class="event-meta">Wednesdays, 11, 18 and 25 Mar, 6:00 to 7:00 PM, at Rhu Point Lookout</p>
           <p class="event-desc">Gentle, accessible yoga as the sun goes down. Suitable for complete beginners, no flexibility required. Mats and props are provided, just bring a water bottle.</p>
-          <a href="#" class="btn btn-primary">View details for Wednesday Sunset Yoga</a>
+          <!-- Fix: a real disabled <button>, not a disabled-looking <a> —
+               native `disabled` removes it from the tab order and is
+               exposed to AT as unavailable automatically. An <a> has no
+               such state; it would stay focusable/clickable regardless of
+               any CSS or aria-disabled applied to it. -->
+          <button type="button" class="btn btn-primary primary-fill" disabled>Registration full</button>
         </li>
 
         <li class="event-card">
           <img class="event-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect width='400' height='160' fill='%23d7f4e3'/%3E%3C/svg%3E" alt="">
           <div class="event-card-top">
             <h3 class="event-title">Saturday Reservoir Run</h3>
-            <span class="status-badge available">&#9679; Spots available</span>
+            <span class="status-badge available"><span aria-hidden="true">&#9679;</span> Spots available</span>
           </div>
-          <p class="event-meta"><time datetime="2027-03-14">Sat, 14 Mar</time>, <time datetime="2027-03-21">21 Mar</time>, <time datetime="2027-03-28">28 Mar</time> &middot; Serangoon Reservoir</p>
+          <p class="event-meta">Saturdays, 14, 21 and 28 Mar, 8:00 to 9:00 AM, at Serangoon Reservoir</p>
           <p class="event-desc">A scenic loop around the water, open to walkers, joggers, and runners alike. Choose your own pace and distance, and turn back whenever you like. Meet at the boathouse car park.</p>
-          <a href="#" class="btn btn-primary">View details for Saturday Reservoir Run</a>
+          <a href="good-register.html?event=saturday-reservoir-run" class="btn btn-primary primary-fill">Register for Saturday Reservoir Run</a>
         </li>
 
       </ul>
@@ -93,31 +110,34 @@
       <h2 class="section-heading">Athlete Spotlight</h2>
       <div class="spotlight-card">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23cfd8e8'/%3E%3C/svg%3E" alt="Portrait of a smiling Let's Play club member">
-        <p class="spotlight-quote">"Let's Play gave me a team to train with and a reason to get up early on Saturdays."</p>
+        <div>
+          <p class="spotlight-quote">"Let's Play gave me a team to train with and a reason to get up early on Saturdays."</p>
+          <p class="spotlight-role">Chloe Lim, wheelchair tennis player</p>
+        </div>
       </div>
     </section>
 
-    <section>
+    <section class="news-section">
       <h2 class="section-heading">Latest News</h2>
       <ul style="list-style:none;margin:0;padding:0;">
         <li class="news-item">
           <img class="news-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23f4e3d7'/%3E%3C/svg%3E" alt="">
           <div class="news-content">
-            <p class="news-headline">Club wins regional Boccia tournament</p>
+            <h3 class="news-headline">Club wins regional Boccia tournament</h3>
             <a href="#" class="news-link">Read about the regional Boccia tournament win</a>
           </div>
         </li>
         <li class="news-item">
           <img class="news-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23d7f4f4'/%3E%3C/svg%3E" alt="">
           <div class="news-content">
-            <p class="news-headline">New accessible changing rooms open next month</p>
+            <h3 class="news-headline">New accessible changing rooms open next month</h3>
             <a href="#" class="news-link">Read about the new accessible changing rooms</a>
           </div>
         </li>
         <li class="news-item">
           <img class="news-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23e3d7f4'/%3E%3C/svg%3E" alt="">
           <div class="news-content">
-            <p class="news-headline">Volunteer coaches needed for spring term</p>
+            <h3 class="news-headline">Volunteer coaches needed for spring term</h3>
             <a href="#" class="news-link">Read about volunteering as a coach this spring</a>
           </div>
         </li>
@@ -127,6 +147,8 @@
   </main>
 
   <footer class="site-footer">
+    <a href="good.html"><img class="logo footer-logo" src="assets/logo_1-invert.svg" alt="Let's Play home"></a>
+
     <!-- Fix: the accessible name lives on the link (aria-label); the icon
          itself is decorative and hidden from AT via aria-hidden, so it's
          never announced twice. -->

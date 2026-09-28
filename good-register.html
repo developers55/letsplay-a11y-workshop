@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - Let's Play</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/good.css">
+</head>
+<body>
+
+  <a href="#main" class="skip-link primary-fill">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-bar">
+      <a href="good.html"><img class="logo" src="assets/logo_1-invert.svg" alt="Let's Play home"></a>
+
+      <button type="button" class="hamburger-btn" id="menu-btn" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu" onclick="toggleMenu()">
+        <span class="material-icons-round hamburger-icon" aria-hidden="true">menu</span>
+      </button>
+    </div>
+
+    <nav id="primary-nav" class="nav-menu" hidden aria-label="Primary">
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.9rem;">
+        <li><a href="#">Home</a></li>
+        <li><a href="good.html#events">Events</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Login</a></li>
+        <li><button type="button" class="nav-close-btn" onclick="toggleMenu()">Close menu</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section>
+      <h1 class="section-heading" id="register-heading">Event Registration</h1>
+      <p class="event-meta" id="register-event-meta" hidden></p>
+      <p class="event-desc" id="register-event-desc" hidden></p>
+
+      <!-- Fix: every field has a real, programmatically-linked <label>,
+           and required vs. optional is called out in visible text (not
+           colour alone) right in the label, so it's exposed to a screen
+           reader and doesn't disappear the moment a value is typed the
+           way placeholder-only text does (WCAG 1.3.1 / 3.3.2). -->
+      <form id="register-form" onsubmit="handleRegisterSubmit(event)">
+        <div class="form-group">
+          <label for="full-name">Full name <span class="hint">(required)</span></label>
+          <input type="text" id="full-name" name="full-name" autocomplete="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email <span class="hint">(required)</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone <span class="hint">(optional)</span></label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel">
+        </div>
+
+        <!-- Fix: a real <fieldset>/<legend> group of native radio
+             buttons sharing one `name`, left fully visible (not hidden
+             behind a styled label) — a screen reader announces the
+             group label, how many options there are, and which one is
+             currently checked, and the browser handles mutual exclusion
+             and arrow-key navigation for free (WCAG 4.1.2 / 1.3.1). -->
+        <fieldset>
+          <legend>Select the date you would like to attend</legend>
+          <div class="date-options" id="date-options">
+            <label class="date-option-row">
+              <input type="radio" name="event-date" value="Tue, 10 Mar" checked>
+              <span class="date-option">Tue, 10 Mar</span>
+            </label>
+            <label class="date-option-row">
+              <input type="radio" name="event-date" value="Tue, 17 Mar">
+              <span class="date-option">Tue, 17 Mar</span>
+            </label>
+            <label class="date-option-row">
+              <input type="radio" name="event-date" value="Tue, 24 Mar">
+              <span class="date-option">Tue, 24 Mar</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Fix: a real <input type="checkbox"> with a linked <label> —
+             a screen reader announces "checkbox, not checked" and the
+             state updates as it's toggled, none of which a styled <div>
+             can do on its own (WCAG 4.1.2). -->
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="agree" name="agree" required>
+          <label for="agree">I agree to the Terms and Conditions <span class="hint">(required)</span></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary primary-fill">Complete Registration</button>
+      </form>
+
+      <!-- Fix: role="status" + aria-live="polite" means a screen reader
+           announces this text the moment it's filled in, same as a
+           sighted user sees the confirmation appear (WCAG 4.1.3). -->
+      <p id="form-status" role="status" aria-live="polite" class="form-status"></p>
+    </section>
+  </main>
+
+  <script src="js/good.js"></script>
+</body>
+</html>

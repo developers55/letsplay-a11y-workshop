@@ -1,19 +1,23 @@
 /* GOOD EXAMPLE — same layout as bad.css, contrast-checked and semantics
    fixed. See facilitator-notes.html for what changed and why.
-   Palette inspired by SDSC's navy + multi-colour accent identity (own
-   original hex values, not copied from their stylesheet) — every accent
-   below is checked to clear 4.5:1 on the background it sits on. */
+   Dark theme requested by Dennard — inspired by Runninghour's dark
+   purple + lime-green identity (own original hex values, not copied
+   from their stylesheet). Every colour pair below is checked to clear
+   4.5:1 (or 3:1 for large text/non-text UI) on the background it sits
+   on — flipping to dark mode means several colours that only worked as
+   button backgrounds in light mode (like the lime brand colour) now
+   pass directly as text, since the contrast math runs the other way. */
 
 body {
-  background: #ffffff;
-  color: #1a1a1a; /* ~17:1 on white */
+  background: #1a1830;
+  color: #f2f2f5; /* ~15.4:1 on dark bg */
 }
 
 /* Fix: a real, visible focus style — never remove outlines site-wide. */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
-  outline: 3px solid #a35b00;
+  outline: 3px solid #ffffff;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -24,8 +28,6 @@ input:focus-visible {
   position: absolute;
   left: -9999px;
   top: 0;
-  background: #0d3b66;
-  color: #ffffff;
   padding: 0.75rem 1rem;
   border-radius: 0 0 8px 0;
   z-index: 10;
@@ -37,7 +39,7 @@ input:focus-visible {
 }
 
 .site-header {
-  background: #ffffff;
+  background: #252140;
 }
 
 .hamburger-btn {
@@ -51,51 +53,12 @@ input:focus-visible {
   cursor: pointer;
 }
 
-.hamburger-btn span {
-  display: block;
-  width: 22px;
-  height: 3px;
-  background: #0d3b66;
-  border-radius: 2px;
-  position: relative;
-  transition: background-color 0.15s ease;
-}
-
-.hamburger-btn span::before,
-.hamburger-btn span::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 22px;
-  height: 3px;
-  background: #0d3b66;
-  border-radius: 2px;
-  transition: transform 0.15s ease;
-}
-
-.hamburger-btn span::before {
-  top: -7px;
-}
-
-.hamburger-btn span::after {
-  top: 7px;
-}
-
-/* Fix: icon visually becomes a close (X) glyph when open, matching the
-   aria-expanded/aria-label state change already happening in good.js —
-   sighted users get the same state cue AT users get. */
-.hamburger-btn.is-open span {
-  background: transparent;
-}
-
-.hamburger-btn.is-open span::before {
-  top: 0;
-  transform: rotate(45deg);
-}
-
-.hamburger-btn.is-open span::after {
-  top: 0;
-  transform: rotate(-45deg);
+/* Fix: icon swaps to a "close" Material Icon glyph when open, matching
+   the aria-expanded/aria-label state change already happening in
+   good.js — sighted users get the same state cue AT users get. */
+.hamburger-icon {
+  font-size: 28px;
+  color: #ffffff; /* ~15.3:1 on header bg */
 }
 
 .nav-menu {
@@ -105,7 +68,7 @@ input:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  background: #fff;
+  background: #252140;
 }
 
 /* Fix: a single nav in the DOM, correctly removed via [hidden] when
@@ -115,7 +78,7 @@ input:focus-visible {
 }
 
 .nav-menu a {
-  color: #0d3b66; /* ~11.4:1 on white */
+  color: #ffffff; /* ~15.3:1 on #252140 */
   text-decoration: underline;
   font-size: 1rem;
 }
@@ -131,7 +94,7 @@ input:focus-visible {
   border: none;
   padding: 0;
   font: inherit;
-  color: #0d3b66;
+  color: #ffffff;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -141,32 +104,43 @@ input:focus-visible {
 }
 
 .hero {
-  background: #eef2f7;
+  background: #1a1830;
+}
+
+/* Fix: base.css's shared section background classes (events-section,
+   spotlight-section, news-section) are light-mode tints — override them
+   here to dark equivalents so heading/body text stays legible. */
+.events-section {
+  background: #2d2a54;
+}
+
+.spotlight-section {
+  background: #1a1830;
+}
+
+.news-section {
+  background: #2d2a54;
 }
 
 .hero h1 {
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   font-weight: 700;
+  letter-spacing: 0em;
   margin: 0 0 0.4rem;
-  color: #0d3b66;
+  color: #ffffff;
 }
 
 .hero p {
-  color: #3d3d3d; /* ~10.4:1 on #eef2f7 */
-}
-
-.btn-primary {
-  background: #D0EC2D;
-  color: #0d3b66; /* ~8.6:1 — dark ink on the bright primary, not white text */
+  color: #b8b6c8; /* ~8.7:1 on dark bg */
 }
 
 .section-heading {
-  color: #0d3b66;
+  color: #ffffff;
 }
 
 .event-card {
-  border-color: #c9c9c9;
-  background: #fff;
+  border-color: #3a3560;
+  background: #252140;
 }
 
 /* Fix: status is an icon + visible text label, not colour alone, and the
@@ -183,23 +157,23 @@ input:focus-visible {
 }
 
 .status-badge.available {
-  background: #e6f4ea;
-  color: #146c2e; /* ~5.4:1 on its own badge background */
+  background: #1e3a2a;
+  color: #7ee2a8; /* ~7.9:1 on its own badge background */
 }
 
 .status-badge.full {
-  background: #fce8e6;
-  color: #b3261e; /* ~5.9:1 on its own badge background */
+  background: #3a1e22;
+  color: #ff9b96; /* ~7.5:1 on its own badge background */
 }
 
 .event-meta {
-  color: #3d3d3d; /* ~10.7:1 on white */
+  color: #b8b6c8; /* ~8.7:1 on #252140 */
 }
 
 /* Fix: link text describes the destination on its own, out of context
    (WCAG 2.4.4) — see the visible text in good.html for each card. */
 .event-link {
-  color: #0a636c; /* ~6.97:1 on white */
+  color: #5fd4de; /* ~9.8:1 on #252140 */
   font-size: 0.9375rem;
   text-decoration: underline;
   font-weight: 600;
@@ -210,55 +184,142 @@ label {
   font-size: 0.9375rem;
   font-weight: 600;
   margin-bottom: 0.35rem;
-  color: #1a1a1a;
+  color: #f2f2f5;
 }
 
 .hint {
   font-weight: 400;
-  color: #3d3d3d;
+  color: #b8b6c8;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="tel"] {
-  border-color: #5c5c5c; /* clearly visible field boundary */
-  color: #1a1a1a;
-  background: #fff;
+  border-color: #4a4570; /* clearly visible field boundary */
+  color: #f2f2f5;
+  background: #252140;
 }
 
 input::placeholder {
-  color: #5c5c5c;
+  color: #8b87a0;
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #00aaf8;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.1rem;
+}
+
+legend {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  color: #f2f2f5;
+}
+
+/* Fix: a plain, fully visible native radio button next to each label —
+   the browser's own radio semantics, focus ring, and checked indicator
+   are never hidden or reimplemented, so there's no risk of the visual
+   state and the accessible state drifting apart. */
+.date-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Fix: a 44px touch target (WCAG 2.5.5/2.5.8) around a visually smaller
+   24px radio — the whole row is the <label>, so the extra hit area
+   isn't just decorative padding, it's part of the same clickable
+   control as the circle and text. */
+.date-option-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  font-weight: 400;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.date-option-row input[type="radio"] {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.date-option {
+  font-size: 0.9375rem;
+  color: #f2f2f5;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.checkbox-group label {
+  display: inline;
+  margin-bottom: 0;
+}
+
+.form-status:not(:empty) {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  background: #1e3a2a;
+  color: #7ee2a8; /* ~7.9:1, same success pairing as .status-badge.available */
+}
+
+/* Shared brand-fill treatment — background/text pairing reused by the
+   skip link and every primary button, so there's one canonical place
+   defining this contrast pair (~5.0:1) instead of duplicating it. */
+.primary-fill,
 .btn-submit {
-  background: #D0EC2D;
-  color: #0d3b66; /* ~8.6:1 — same primary/ink pairing as .btn-primary */
+  background: #00aaf8;
+  color: #10315c;
+}
+
+/* Fix: a visible disabled state to match the native `disabled` attribute
+   — WCAG contrast requirements don't apply to disabled controls, but a
+   sighted user still needs a visual cue that it's unavailable, not just
+   identical-looking and unresponsive. */
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .spotlight-quote {
-  color: #1a1a1a;
+  color: #f2f2f5;
 }
 
 .spotlight-role {
-  color: #a8235f; /* ~6.84:1 on white */
+  color: #f78fc9; /* ~7.9:1 on dark bg */
   font-size: 0.875rem;
-  margin: 0.15rem 0 0;
+  margin: 0.6rem 0 0;
 }
 
 .news-item {
-  border-color: #d9d9d9;
-  background: #fff;
+  border-color: #3a3560;
+  background: #252140;
 }
 
 .news-link {
-  color: #0a636c; /* ~6.97:1 on white */
+  color: #5fd4de; /* ~9.8:1 on #252140 */
   font-size: 0.9375rem;
   font-weight: 600;
   text-decoration: underline;
 }
 
 .site-footer {
-  background: #f3f6fa;
+  background: #252140;
 }
 
 .social-row a {
@@ -268,15 +329,15 @@ input::placeholder {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #e6edf6;
+  background: #252140;
 }
 
 .social-icon {
-  fill: #0d3b66;
+  fill: #ffffff;
 }
 
 .footer-links a {
-  color: #3d6b1c; /* ~6.3:1 on #f3f6fa */
+  color: #ffffff; /* ~15.3:1 on #252140 */
   text-decoration: underline;
   font-size: 0.875rem;
 }

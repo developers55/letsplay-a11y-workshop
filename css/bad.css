@@ -30,36 +30,20 @@ body {
    accessible name, or aria-expanded, and the global `outline: none`
    above means it shows no focus ring even though it IS focusable. */
 .hamburger {
-  width: 32px;
-  height: 24px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
-.hamburger span {
-  display: block;
-  height: 3px;
-  background: #10315c;
-  border-radius: 2px;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-/* Visual-only fix: the icon morphs into an X when open, matching the
-   sighted-user affordance in good.html — but unlike good.html, nothing
-   here is exposed to AT (no aria-expanded, no accessible name at all,
-   see issue #3), so a screen reader user gets none of this feedback. */
-.hamburger.is-open span:nth-child(1) {
-  transform: translateY(10.5px) rotate(45deg);
-}
-
-.hamburger.is-open span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.is-open span:nth-child(3) {
-  transform: translateY(-10.5px) rotate(-45deg);
+/* Visual-only fix: swaps from the "menu" to the "close" Material Icon
+   glyph when open, matching the sighted-user affordance in good.html —
+   but unlike good.html, nothing here is exposed to AT (no aria-expanded,
+   no accessible name at all, see issue #3), so a screen reader user gets
+   none of this feedback. */
+.hamburger-icon {
+  font-size: 28px;
+  color: #10315c;
 }
 
 /* Issue: the "second" nav copy is hidden using an old off-screen-position
@@ -109,7 +93,7 @@ body {
    first thing on the page. See js/bad.js for the interval. */
 .hero-carousel {
   position: relative;
-  min-height: 560px;
+  min-height: 480px;
   overflow: hidden;
 }
 
@@ -123,7 +107,7 @@ body {
   align-items: center;
   text-align: center;
   padding: 2rem 1.25rem 1.75rem;
-  min-height: 560px;
+  min-height: 480px;
   background-size: cover;
   background-position: center;
 }
@@ -135,8 +119,9 @@ body {
 /* Issue: this is a <div>, not an <h1> — visually looks like a heading,
    announces as plain text to a screen reader (WCAG 1.3.1). */
 .hero-title {
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   font-weight: 700;
+  letter-spacing: 0em;
   margin: 0 0 0.4rem;
   color: #ffffff;
 }
@@ -323,19 +308,19 @@ input::placeholder {
 }
 
 .site-footer {
-  background: #f3f6fa;
+  background: #fe83f7;
 }
 
 /* Issue: icon-only social links, no accessible name (WCAG 4.1.2 / 2.4.4) —
    the icons below have no <title>, and their links have no aria-label. */
 .social-icon {
-  fill: #10315c;
+  fill: #ffffff;
   opacity: 0.7;
 }
 
 /* Issue: low-contrast small footer links, ~2.6:1 contrast (WCAG 1.4.3) */
 .footer-links a {
-  color: var(--brand-color);
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -369,4 +354,63 @@ input::placeholder {
   background: var(--brand-color);
   color: #ffffff;
   border-color: var(--brand-color);
+}
+
+/* Issue: see the HTML comment above — no real checkbox semantics at
+   all, just a class swap on a plain <div>. */
+.fake-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  margin-bottom: 1.1rem;
+  font-size: 0.9375rem;
+  color: #10315c;
+}
+
+.checkbox-box {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.fake-checkbox.checked .checkbox-box {
+  background: var(--brand-color);
+  border-color: var(--brand-color);
+}
+
+.fake-checkbox.checked .checkbox-box::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Issue: see the HTML comment above — visible feedback with no
+   aria-live/role="status" behind it at all. */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: -80px;
+  transform: translateX(-50%);
+  background: #10315c;
+  color: #ffffff;
+  padding: 0.85rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  transition: bottom 0.3s ease;
+  z-index: 100;
+}
+
+.toast.show {
+  bottom: 24px;
 }

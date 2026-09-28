@@ -7,16 +7,19 @@
 function toggleMenu() {
   var nav = document.getElementById('nav-copy-1');
   var hamburger = document.querySelector('.hamburger');
+  var icon = hamburger.querySelector('.hamburger-icon');
   if (nav.classList.contains('is-hidden-offscreen')) {
     nav.classList.remove('is-hidden-offscreen');
     nav.classList.add('is-visible');
     hamburger.classList.add('is-open');
+    if (icon) icon.textContent = 'close';
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   } else {
     nav.classList.remove('is-visible');
     nav.classList.add('is-hidden-offscreen');
     hamburger.classList.remove('is-open');
+    if (icon) icon.textContent = 'menu';
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
   }
@@ -33,8 +36,23 @@ function handleHamburgerKey(e) {
   }
 }
 
+// Issue: toggles a checked class on a plain <div> — no aria-checked,
+// no role="checkbox", nothing exposed to AT at all.
+function toggleCheckbox(el) {
+  el.classList.toggle('checked');
+}
+
+// Issue: shows the toast, but it's just a class toggle on a plain
+// <div> — no role="status"/aria-live, so a screen reader never hears
+// that submission succeeded (WCAG 4.1.3 Status Messages).
 function submitForm() {
-  alert('Thanks for signing up!');
+  var toast = document.getElementById('toast');
+  if (toast) {
+    toast.classList.add('show');
+    setTimeout(function () {
+      toast.classList.remove('show');
+    }, 3000);
+  }
 }
 
 // Auto-advancing carousel: no pause/stop control anywhere (WCAG 2.2.2),
