@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Facilitator Notes</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <style>
   * { box-sizing: border-box; }
   html { font-size: 16px; }
@@ -147,7 +148,7 @@
     <div class="issue">
       <h2><span class="num">8.</span> Dates written in ambiguous numeric slash format</h2>
       <dl>
-        <dt>Bad:</dt><dd><code>Tue, 4/5, 3/4, 10/2</code> &mdash; a screen reader doesn't recognise these as dates, so it reads the digits and punctuation literally ("four slash five") instead of a month name. Every one of these is also genuinely locale-ambiguous, not just badly read aloud: with both numbers 12 or under, <code>4/5</code> could mean 4 May or 5 April, <code>3/4</code> could mean 3 April or 4 March, depending entirely on whether the reader assumes DD/MM or MM/DD (Dennard's own team splits on this).</dd>
+        <dt>Bad:</dt><dd><code>Tue, 4/5, 11/5, 18/5</code> &mdash; a screen reader doesn't recognise these as dates, so it reads the digits and punctuation literally ("four slash five") instead of a month name. The first date is also genuinely locale-ambiguous, not just badly read aloud: <code>4/5</code> could mean 4 May or 5 April, depending entirely on whether the reader assumes DD/MM or MM/DD (Dennard's own team splits on this).</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.3.1 Info and Relationships</span></dd>
         <dt>Fix:</dt><dd>Spelled-out month ("Tue, 10 Mar"), wrapped in a semantic <code>&lt;time datetime="2027-03-10"&gt;</code> element so both the visible text and the underlying value are unambiguous.</dd>
       </dl>

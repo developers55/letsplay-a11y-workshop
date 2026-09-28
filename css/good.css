@@ -8,9 +8,14 @@
    button backgrounds in light mode (like the lime brand colour) now
    pass directly as text, since the contrast math runs the other way. */
 
+/* Fix: Atkinson Hyperlegible — designed by the Braille Institute
+   specifically for low-vision readability (distinguishes similar
+   characters like 1/l/I and 0/O far better than the default system
+   stack), falling back to that same stack if the font fails to load. */
 body {
   background: #1a1830;
   color: #f2f2f5; /* ~15.4:1 on dark bg */
+  font-family: 'Atkinson Hyperlegible Next', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* Fix: a real, visible focus style — never remove outlines site-wide. */
@@ -128,10 +133,16 @@ input:focus-visible {
 
 .hero h1 {
   font-size: 2.25rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0em;
   margin: 0 0 0.4rem;
   color: #ffffff;
+}
+
+.section-heading,
+.event-title,
+.news-headline {
+  font-weight: 600;
 }
 
 .hero p {

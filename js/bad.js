@@ -142,6 +142,31 @@ window.selectDate = function (el) {
   el.classList.add('selected');
 };
 
+// bad-register.html — the dates shown now actually match whichever
+// event's "Register" link was clicked on bad.html, instead of always
+// showing Tuesday Stadium Run's dates regardless of source event. Still
+// built the same "bad" way as everything else on this page: plain
+// unlabelled <div>s with an inline onclick, no semantics added.
+var BAD_EVENT_DATES = {
+  'tuesday-stadium-run': ['Tue, 4/5', 'Tue, 11/5', 'Tue, 18/5'],
+  'wednesday-sunset-yoga': ['Wed, 6/8', 'Wed, 13/8', 'Wed, 20/8'],
+  'saturday-reservoir-run': ['Sat, 5/6', 'Sat, 12/6', 'Sat, 19/6']
+};
+
+(function () {
+  var container = document.getElementById('date-options');
+  if (!container) return; // not on bad-register.html
+
+  var slug = new URLSearchParams(window.location.search).get('event');
+  var dates = BAD_EVENT_DATES[slug];
+  if (!dates) return; // no/unknown event — keep the generic dates already in the HTML
+
+  container.innerHTML = dates.map(function (date, i) {
+    var selected = i === 0 ? ' selected' : '';
+    return '<div class="date-option' + selected + '" onclick="selectDate(this)">' + date + '</div>';
+  }).join('');
+})();
+
 // bad-register.html — Issue: pointerdown/pointermove/pointerup only,
 // nothing else. No keydown handler, no tabindex, no role="slider", no
 // aria-valuenow/min/max/text. A mouse or touchscreen user can drag the

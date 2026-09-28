@@ -45,21 +45,21 @@ var EVENTS = {
   'tuesday-stadium-run': {
     name: 'Tuesday Stadium Run',
     description: 'An easy-paced group run along the waterfront, great for building a weekly habit. All paces welcome, and the group regroups every kilometre. Meet at the main entrance; bring water and comfortable shoes.',
-    dates: ['Tue, 10 Mar', 'Tue, 17 Mar', 'Tue, 24 Mar'],
+    dates: ['Tue, 4 May', 'Tue, 11 May', 'Tue, 18 May'],
     time: '6:30 – 7:30 AM',
     location: 'Stadium Waterfront Promenade'
   },
   'wednesday-sunset-yoga': {
     name: 'Wednesday Sunset Yoga',
     description: 'Gentle, accessible yoga as the sun goes down. Suitable for complete beginners, no flexibility required. Mats and props are provided, just bring a water bottle.',
-    dates: ['Wed, 11 Mar', 'Wed, 18 Mar', 'Wed, 25 Mar'],
+    dates: ['Wed, 6 Aug', 'Wed, 13 Aug', 'Wed, 20 Aug'],
     time: '6:00 – 7:00 PM',
     location: 'Rhu Point Lookout'
   },
   'saturday-reservoir-run': {
     name: 'Saturday Reservoir Run',
     description: 'A scenic loop around the water, open to walkers, joggers, and runners alike. Choose your own pace and distance, and turn back whenever you like. Meet at the boathouse car park.',
-    dates: ['Sat, 14 Mar', 'Sat, 21 Mar', 'Sat, 28 Mar'],
+    dates: ['Sat, 5 Jun', 'Sat, 12 Jun', 'Sat, 19 Jun'],
     time: '8:00 – 9:00 AM',
     location: 'Serangoon Reservoir'
   }
