@@ -138,6 +138,10 @@ input:focus-visible {
   color: #b8b6c8; /* ~8.7:1 on dark bg */
 }
 
+.hero p.body-large {
+  color: #f2f2f5; /* ~15.4:1 on dark bg */
+}
+
 .section-heading {
   color: #ffffff;
 }
