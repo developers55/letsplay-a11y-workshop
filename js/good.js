@@ -1,8 +1,8 @@
 // GOOD EXAMPLE JS — proper button semantics + aria-expanded, and the
 // nav is actually removed from the accessibility tree when closed.
 
-// "a, b and c" instead of "a, b, c" — for building the sr-only spoken
-// version of a list, so it reads as one natural sentence.
+// "a, b and c" instead of "a, b, c" — so a list of dates reads as one
+// natural sentence instead of a comma-spliced run-on.
 function naturalJoin(items) {
   if (items.length <= 1) return items.join('');
   return items.slice(0, -1).join(', ') + ' and ' + items[items.length - 1];
@@ -46,21 +46,30 @@ var EVENTS = {
     name: 'Tuesday Stadium Run',
     description: 'An easy-paced group run along the waterfront, great for building a weekly habit. All paces welcome, and the group regroups every kilometre. Meet at the main entrance; bring water and comfortable shoes.',
     dates: ['Tue, 4 May', 'Tue, 11 May', 'Tue, 18 May'],
+    weekday: 'Tuesdays',
+    month: 'May',
     time: '6:30 – 7:30 AM',
+    time12h: '6:30 to 7:30 AM',
     location: 'Stadium Waterfront Promenade'
   },
   'wednesday-sunset-yoga': {
     name: 'Wednesday Sunset Yoga',
     description: 'Gentle, accessible yoga as the sun goes down. Suitable for complete beginners, no flexibility required. Mats and props are provided, just bring a water bottle.',
     dates: ['Wed, 6 Aug', 'Wed, 13 Aug', 'Wed, 20 Aug'],
+    weekday: 'Wednesdays',
+    month: 'Aug',
     time: '6:00 – 7:00 PM',
+    time12h: '6:00 to 7:00 PM',
     location: 'Rhu Point Lookout'
   },
   'saturday-reservoir-run': {
     name: 'Saturday Reservoir Run',
     description: 'A scenic loop around the water, open to walkers, joggers, and runners alike. Choose your own pace and distance, and turn back whenever you like. Meet at the boathouse car park.',
     dates: ['Sat, 5 Jun', 'Sat, 12 Jun', 'Sat, 19 Jun'],
+    weekday: 'Saturdays',
+    month: 'Jun',
     time: '8:00 – 9:00 AM',
+    time12h: '8:00 to 9:00 AM',
     location: 'Serangoon Reservoir'
   }
 };
@@ -78,14 +87,14 @@ var EVENTS = {
 
   // Fix: Eventbrite-style date/time/location line, so a registrant sees
   // exactly what they're signing up for right next to the form, not just
-  // a bare event name. The dense, dot-separated version is hidden from
-  // AT (three date fragments plus a literal "·" otherwise read aloud as
-  // choppy, separately-paused noise) in favour of one clean sentence.
+  // a bare event name — written as one flowing sentence (same style as
+  // the event cards on good.html), not a dot-separated, fragmented one.
   var meta = document.getElementById('register-event-meta');
-  if (meta && eventInfo.dates && eventInfo.time && eventInfo.location) {
-    var visual = eventInfo.dates.join(', ') + ' · ' + eventInfo.time + ' · ' + eventInfo.location;
-    var spoken = naturalJoin(eventInfo.dates) + ', ' + eventInfo.time + ', at ' + eventInfo.location;
-    meta.innerHTML = '<span aria-hidden="true">' + visual + '</span> <span class="sr-only">' + spoken + '</span>';
+  if (meta && eventInfo.dates && eventInfo.weekday && eventInfo.month && eventInfo.time12h && eventInfo.location) {
+    var days = eventInfo.dates.map(function (d) {
+      return d.split(', ')[1].split(' ')[0];
+    });
+    meta.textContent = eventInfo.weekday + ', ' + naturalJoin(days) + ' ' + eventInfo.month + ', ' + eventInfo.time12h + ', at ' + eventInfo.location;
     meta.hidden = false;
   }
 
