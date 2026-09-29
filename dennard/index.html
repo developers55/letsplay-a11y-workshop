@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Designing for Visual Impairment — slide notes for Dennard</title>
+<title>Designing for Visual Impairment: slide notes for Dennard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -78,25 +78,35 @@
 
 <header class="page">
   <h1>Designing for Visual Impairment</h1>
-  <p class="sub">Slide notes for Dennard, covering all 33 slides. Adeline presents
-  the slides and Dennard runs the demo.</p>
+  <p class="sub">Demo guide and slide notes for Dennard, covering section 5 of the
+  deck, "Screen reader demo". Adeline presents the 33 slides. Dennard runs the demo
+  twice.</p>
 </header>
 
 <nav class="toc" aria-label="Contents">
   <h2>Contents</h2>
   <ol>
     <li><a href="#how">How to use this page</a></li>
-    <li><a href="#intro">Opening and the bad example (slides 1 to 3)</a></li>
-    <li><a href="#demo">Your demo, after slide 3</a></li>
-    <li><a href="#colour">1. Colour (slides 4 to 7)</a></li>
-    <li><a href="#touch">2. Touch target (slide 8)</a></li>
-    <li><a href="#alt">3. Text alternatives (slides 9 to 11)</a></li>
-    <li><a href="#names">4. Names and labels (slides 12 to 18)</a></li>
-    <li><a href="#semantics">5. Semantics (slides 19 to 25)</a></li>
-    <li><a href="#focus">6. Focus (slides 26 to 28)</a></li>
-    <li><a href="#carousels">7. Carousels (slides 29 to 30)</a></li>
-    <li><a href="#gestures">8. Gesture-based interaction (slides 31 to 32)</a></li>
-    <li><a href="#improved">Closing: the improved site (slide 33)</a></li>
+    <li><a href="#demo">Demo guide</a>
+      <ul>
+        <li><a href="#demo-bad">Demo on the bad site</a></li>
+        <li><a href="#demo-good">Demo on the improved site</a></li>
+      </ul>
+    </li>
+    <li><a href="#slides">Slide content: section 5, Screen reader demo</a>
+      <ul>
+        <li><a href="#intro">Opening and the bad example (slides 1 to 3)</a></li>
+        <li><a href="#colour">1. Colour (slides 4 to 7)</a></li>
+        <li><a href="#touch">2. Touch target (slide 8)</a></li>
+        <li><a href="#alt">3. Text alternatives (slides 9 to 11)</a></li>
+        <li><a href="#names">4. Names and labels (slides 12 to 18)</a></li>
+        <li><a href="#semantics">5. Semantics (slides 19 to 25)</a></li>
+        <li><a href="#focus">6. Focus (slides 26 to 28)</a></li>
+        <li><a href="#carousels">7. Carousels (slides 29 to 30)</a></li>
+        <li><a href="#gestures">8. Gesture-based interaction (slides 31 to 32)</a></li>
+        <li><a href="#improved">Closing: the improved site (slide 33)</a></li>
+      </ul>
+    </li>
   </ol>
 </nav>
 
@@ -104,49 +114,240 @@
 
 <h2 id="how">How to use this page</h2>
 
-<p>Every slide has its own heading, numbered in order, so you can move through
-the deck by heading. Under each heading you get what is written on the slide,
-then a description of what is shown on it.</p>
+<p>This page has two parts. The <a href="#demo">demo guide</a> comes first. It
+covers both demos you run. The <a href="#slides">slide content</a> comes second. It
+covers all 33 slides in order.</p>
 
-<p>Where a slide carries the same point a second time, through a screenshot, a
-rotor list or a good-example counterpart, its heading is the one above it with
-"continued" after it. That means you will hear the same heading two or three
-times in a row, which is deliberate: it tells you the point has not changed.</p>
+<p>Everything is organised by heading. The demo guide has one heading per task.
+The slide content has one heading per slide, numbered in order. Under each slide
+heading is the text on that slide, then a description of the picture. Use the
+headings rotor if you want to move around that way.</p>
 
-<p>The slide pictures on this page are marked decorative and are skipped, because
-everything in them is written out in the text instead. Nothing on this page moves
-or auto-plays.</p>
+<p>Some slides repeat the point of the slide before them. Those slides use the same
+heading with "continued" added. You will hear the same heading two or three times in
+a row. This is on purpose. It means the point has not changed.</p>
+
+<p>The slide pictures are marked decorative, so they are skipped. Everything in
+them is written out in the text. Nothing on this page moves or plays on its own.</p>
 
 <p>The two live sites are
 <a href="https://letsplay-a11y-workshop.vercel.app/bad">the bad version of Let's Play</a>
 and <a href="https://letsplay-a11y-workshop.vercel.app/good">the improved version</a>.</p>
 
-<h2 id="intro">Opening and the bad example</h2>
+<h2 id="demo">Demo guide</h2>
 
-<h3>Slide 1 — Section title: Screen reader demo</h3>
+<p>You run the demo twice. The first demo is on the bad site, after slide 3. The
+second is on the improved site, at slide 33. You do the same four tasks both
+times.</p>
+
+<p>Adeline prompts you at the start of each task. You work through it out loud
+while the room watches your screen. The notes under each task list what the page
+does, so you can name each problem as you meet it.</p>
+
+<h3 id="demo-bad">Demo on the bad site</h3>
+
+<p>This demo runs on <a href="https://letsplay-a11y-workshop.vercel.app/bad">the
+bad version of Let's Play</a>, straight after slide 3.</p>
+
+<h4>Part 1: First impressions of the home page</h4>
+
+<p><strong>Adeline asks:</strong> can you open the home page and tell us what you
+understand from it?</p>
+
+<p><strong>What you will run into:</strong></p>
+<ul>
+  <li>The logo announces as "logo underscore one dot s v g". The filename is the
+  alt text.</li>
+  <li>The hamburger announces as "button" and nothing else. It has no name. It does
+  not say whether it is open or closed.</li>
+  <li>The hero is a three-slide carousel. It advances on its own while you are
+  reading it.</li>
+  <li>There are no headings until well down the page. The first ones are level 4.
+  There is no level 1 or level 2 above them.</li>
+  <li>There are no landmarks, so you cannot jump to the events or the footer.</li>
+  <li>The event photos have no alt attribute, so you may hear the image path read out.</li>
+  <li>Three links all say "Register" and three more all say "Read More".</li>
+  <li>The three social links in the footer announce as "link", "link", "link".</li>
+  <li>The whole navigation appears twice in the links list, because there are two
+  copies of it in the page.</li>
+</ul>
+
+<h4>Part 2: Task 1: find Saturday Reservoir Run and register for Sat, 5 Jun</h4>
+
+<p><strong>What you will run into, in order:</strong></p>
+<ul>
+  <li>The three events are plain containers, not a list. Nothing announces "list, 3
+  items". There is no boundary between one event and the next. To find which
+  "Register" belongs to Saturday Reservoir Run, you have to read everything in
+  between.</li>
+  <li>Its dates read as "Sat, five slash six, twelve slash six, nineteen slash six".
+  The middle dots between the date, the time and the location are spoken as
+  punctuation.</li>
+  <li>On the registration page, the three form fields have no labels. The only hint
+  is the placeholder text. The asterisk that marks a field as required is in the
+  placeholder too, so both disappear once you type.</li>
+  <li>The three date options look like radio buttons but are plain containers. There
+  is no group and no announced count. Nothing tells you which one is selected. Sat
+  5/6 is already selected by default.</li>
+  <li>The terms and conditions checkbox is also a plain container. It never says
+  checked or unchecked.</li>
+  <li>The "Verify you're human" control has to be dragged sideways. That gesture
+  conflicts with the swipe you use to move between elements.</li>
+  <li>Submitting the form shows a confirmation on screen. It is never announced, so
+  you cannot tell whether it worked.</li>
+</ul>
+
+<h4>Part 3: Task 2: find the news story "Volunteer coaches needed for spring term"</h4>
+
+<p><strong>What you will run into:</strong></p>
+<ul>
+  <li>It is the third of three news items. The news section is a carousel that
+  rotates about once a second.</li>
+  <li>The only controls are three dots. They are unlabelled buttons and all announce
+  the same. Nothing marks which one is current.</li>
+  <li>Choosing a dot does not stop the rotation. It moves on again a moment after
+  you reach the item.</li>
+  <li>There is no pause, stop or hide control anywhere.</li>
+</ul>
+
+<h4>Part 4: Task 3: open the navigation and go to Contact Us</h4>
+
+<p><strong>What you will run into:</strong></p>
+<ul>
+  <li>The hamburger is a plain container styled to look like a button. You can reach
+  it and open it. It announces as "button" with no name and no state, so nothing
+  tells you the menu opened.</li>
+  <li>Opening it does not move focus. The menu markup sits at the very end of the
+  page. Moving forward from the hamburger takes you into the hero, the events, the
+  spotlight and the news first. On screen, the menu is covering all of that.</li>
+  <li>The content behind the panel is not made unreachable, so you can still reach
+  all of it.</li>
+  <li>When you reach the menu, Contact Us appears twice. The navigation exists twice
+  in the page.</li>
+</ul>
+
+
+<h3 id="demo-good">Demo on the improved site</h3>
+
+<p>This demo runs on <a href="https://letsplay-a11y-workshop.vercel.app/good">the
+improved version of Let's Play</a>, at slide 33. The four tasks are the same. For
+each one, point out which problem from the first demo has gone.</p>
+
+<h4>Part 1: First impressions of the home page</h4>
+
+<p><strong>Adeline asks:</strong> can you open the home page again and tell us what
+you understand from it this time?</p>
+
+<p><strong>What is different:</strong></p>
+<ul>
+  <li>A "Skip to main content" link is the first thing you reach, so you can jump
+  past the header in one move.</li>
+  <li>The logo announces as "Let's Play home" instead of a filename.</li>
+  <li>The menu button announces as "Open menu". It also says whether it is expanded
+  or collapsed.</li>
+  <li>There are real landmarks. A header, a navigation region named "Primary", one
+  main region and a footer. You can move between them instead of swiping through
+  everything.</li>
+  <li>The headings form a proper outline. One level 1, "Every Body Belongs". Level 2
+  for each section. Level 3 for each event and news item. The headings rotor now
+  gives you the shape of the page.</li>
+  <li>The hero is a single still image with its text underneath it, so nothing moves
+  while you are reading.</li>
+  <li>The three events are a real list. You hear "list, 3 items". Each event's
+  title, status and link are grouped as one item.</li>
+  <li>Each event's status is spoken as "Spots available" or "Fully booked". It is no
+  longer shown only as a coloured dot.</li>
+  <li>Every link says where it goes. The three links called "Register" are now named
+  after their events, such as "Register for Saturday Reservoir Run".</li>
+  <li>The footer's social links announce as "Let's Play on Facebook", "Let's Play on
+  Instagram" and "Let's Play on YouTube".</li>
+  <li>The navigation appears once, not twice.</li>
+</ul>
+
+<h4>Part 2: Task 1: find Saturday Reservoir Run and register for Sat, 5 Jun</h4>
+
+<p><strong>What is different:</strong></p>
+<ul>
+  <li>The link is called "Register for Saturday Reservoir Run", so you can find it
+  in one move in the links rotor.</li>
+  <li>The event details read as one sentence. "Saturdays, 5, 12 and 19 Jun, 8:00 to
+  9:00 AM, at Serangoon Reservoir". No slashes and no middle dots.</li>
+  <li>The registration page is named after the event you came from. It reads "Event
+  Registration for Saturday Reservoir Run".</li>
+  <li>Every field has a real label. Each label says "(required)" or "(optional)" in
+  its own text, so that does not disappear when you type.</li>
+  <li>The dates are a real radio group. Its legend is "Select the date you would
+  like to attend". You hear the group name, the number of options and which one is
+  selected. The dates are the Saturday dates for this event, not a fixed set of
+  Tuesdays.</li>
+  <li>The terms and conditions control is a real checkbox. It announces whether it
+  is checked.</li>
+  <li>The "Slide to verify" control is gone. A background check replaces it and
+  needs no interaction.</li>
+  <li>The confirmation after submitting is announced. You hear it at the same moment
+  it appears on screen.</li>
+</ul>
+
+<h4>Part 3: Task 2: find the news story "Volunteer coaches needed for spring term"</h4>
+
+<p><strong>What is different:</strong></p>
+<ul>
+  <li>The news carousel is gone. All three stories are in a plain list and all are
+  present at once.</li>
+  <li>Each headline is a real level 3 heading. You can go straight to it from the
+  headings rotor.</li>
+  <li>Its link says "Read about volunteering as a coach this spring" instead of
+  "Read More".</li>
+  <li>Each news photo has alt text describing what is in it.</li>
+</ul>
+
+<h4>Part 4: Task 3: open the navigation and go to Contact Us</h4>
+
+<p><strong>What is different:</strong></p>
+<ul>
+  <li>The menu button is a real button with a name. Opening it changes the name to
+  "Close menu" and the state to expanded. Focus stays on the button, so you hear
+  that change where you already are.</li>
+  <li>The menu markup sits straight after the header. The next move takes you into
+  the first menu item.</li>
+  <li>When the menu is closed it is properly hidden. Its links are not left in the
+  page.</li>
+  <li>Contact Us appears once.</li>
+  <li>Closing the menu returns focus to the button you opened it with.</li>
+</ul>
+
+<h2 id="slides">Slide content: section 5, Screen reader demo</h2>
+
+<p>These 33 slides are section 5 of Adeline's deck, "Screen reader demo". They are
+  not the whole session. The sections before this one are Adeline's alone, and this
+  page does not cover them.</p>
+
+<h3 id="intro">Opening and the bad example</h3>
+
+<h4>Slide 1: Section title: Screen reader demo</h4>
 <figure><img src="slides/slide-01.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "5. Screen reader demo", white on an orange panel
 filling the right half.</p>
 <p><strong>Shown:</strong> a large iPhone screenshot of the iOS VoiceOver settings
-screen, cropped at the left edge. The VoiceOver switch is on. Below it: the usual
-explanation that VoiceOver speaks items on the screen, tap once to select and
-double-tap to activate, a VoiceOver Practice button, a speaking-rate slider set
-about two-thirds along, then Speech and Braille rows.</p>
+screen, cropped at the left edge. The VoiceOver switch is on. Below it is the
+standard explanation that VoiceOver speaks items on the screen, that you tap once to
+select and double-tap to activate. Then a VoiceOver Practice button, a speaking-rate
+slider set about two-thirds along, and rows for Speech and Braille.</p>
 
-<h3>Slide 2 — The bad example</h3>
+<h4>Slide 2: The bad example</h4>
 <figure><img src="slides/slide-02.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "The bad example". Let's Play is a fictional
 community sports club website. "Scan to access:" above a QR code.</p>
 <p><strong>Shown:</strong> on the right, a phone-width screenshot of the bad site's
-home page. The Let's Play logo and a hamburger icon sit in the header. Below is a
-hero photo of three athletes sitting on a bench in a gym, one with a running blade,
-with "Every Body Belongs" and a "View upcoming events" button laid over the photo,
-and three carousel dots underneath. Further down, an "Upcoming Events" heading and
-the first event card showing the National Stadium.</p>
+home page. The Let's Play logo and a hamburger icon sit in the header. Below them is
+a hero photo of three athletes sitting on a bench in a gym, one with a running
+blade. "Every Body Belongs" and a "View upcoming events" button are laid over the
+photo, with three carousel dots underneath. Further down are an "Upcoming Events"
+heading and the first event card, showing the National Stadium.</p>
 <p><strong>Note:</strong> the QR code goes to the bad page, and participants scan it
 so that they can follow along on their own phones.</p>
 
-<h3>Slide 3 — Discussion: what visual accessibility issues can you find?</h3>
+<h4>Slide 3: Discussion: what visual accessibility issues can you find?</h4>
 <figure><img src="slides/slide-03.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "Discussion:" then "What visual accessibility
 issues can you find?" Three minutes, with the person next to you:</p>
@@ -161,111 +362,23 @@ issues can you find?" Three minutes, with the person next to you:</p>
 <p><strong>Shown:</strong> text only.</p>
 <p class="note"><strong>Your demo starts after this slide.</strong> By this point the
 room has spent three minutes looking at the bad page, so they will have found the
-problems they can see. You pick it up from there.</p>
+problems they can see. You pick it up from there, following
+<a href="#demo-bad">the demo on the bad site</a> in the demo guide above.</p>
 
-<h2 id="demo">Your demo</h2>
+<h3 id="colour">1. Colour</h3>
 
-<p>The demo has four parts. Adeline will prompt you at the start of each one, and
-you work through it out loud while the room watches. Everything below happens on
-<a href="https://letsplay-a11y-workshop.vercel.app/bad">the bad page</a>. The notes
-under each part describe what the page will actually do, so that you can name each
-problem as you meet it rather than having to go looking for it.</p>
-
-<h3>Part 1 — First impressions of the home page</h3>
-
-<p><strong>Adeline asks:</strong> can you open the home page and tell us what you
-understand from it?</p>
-
-<p><strong>What you will run into:</strong></p>
-<ul>
-  <li>The logo announces as "logo underscore one dot s v g". The filename is the
-  alt text.</li>
-  <li>The hamburger announces as a bare "button". No name, and no indication of
-  whether it is open or closed.</li>
-  <li>The hero is a three-slide carousel that advances on its own, so whatever you
-  are reading gets replaced underneath you.</li>
-  <li>Nothing is a heading until well down the page, and the first ones you reach
-  are level 4 with no level 1 or 2 above them.</li>
-  <li>There are no landmarks at all, so there is no way to jump to the events or
-  the footer.</li>
-  <li>The event photos have no alt attribute, so you may hear the image path read out.</li>
-  <li>Three links all say "Register" and three more all say "Read More".</li>
-  <li>The three social links in the footer announce as "link", "link", "link".</li>
-  <li>The whole navigation appears twice in the links list, because there are two
-  copies of it in the page.</li>
-</ul>
-
-<h3>Part 2 — Task 1: find Saturday Reservoir Run and register for Sat, 5 Jun</h3>
-
-<p><strong>What you will run into, in order:</strong></p>
-<ul>
-  <li>The three events are a stack of plain containers, not a list, so nothing
-  announces "list, 3 items" and there is no boundary between one event and the next.
-  Working out which "Register" belongs to Saturday Reservoir Run means reading
-  everything in between.</li>
-  <li>Its dates read as "Sat, five slash six, twelve slash six, nineteen slash six",
-  and the middle dots between the date, the time and the location get spoken as
-  punctuation.</li>
-  <li>On the registration page, the three form fields have no labels. The only hint
-  is placeholder text, which also carries the asterisk that marks a field required,
-  so once you type anything that information is gone.</li>
-  <li>The three date options look like radio buttons but are plain containers. There
-  is no group, no announced count, and no way to tell which one is selected, even
-  though Sat 5/6 is already picked by default.</li>
-  <li>The terms and conditions checkbox is also a plain container, so it never says
-  checked or unchecked.</li>
-  <li>The "Verify you're human" control has to be dragged sideways, which fights the
-  swipe you use to move between elements.</li>
-  <li>Submitting shows a confirmation on screen that is never announced, so there is
-  no way to know whether it worked.</li>
-</ul>
-
-<h3>Part 3 — Task 2: find the news story "Volunteer coaches needed for spring term"</h3>
-
-<p><strong>What you will run into:</strong></p>
-<ul>
-  <li>It is the third of three news items, and the news section is a carousel that
-  rotates roughly every second.</li>
-  <li>The only controls are three dots, and they are unlabelled buttons that all
-  announce identically, with nothing marking which one is current.</li>
-  <li>Choosing a dot by hand does not stop the rotation, so you get pulled off the
-  item a moment after you reach it.</li>
-  <li>There is no pause, stop or hide control anywhere.</li>
-</ul>
-<p class="note">This is the easiest part for the room to follow, because the timer
-moves the content on screen at the same moment it moves under you.</p>
-
-<h3>Part 4 — Task 3: open the navigation and go to Contact Us</h3>
-
-<p><strong>What you will run into:</strong></p>
-<ul>
-  <li>The hamburger is a container dressed up as a button. You can reach it and
-  open it, but it announces as a bare "button" with no name and no open or closed
-  state, so nothing tells you the menu opened.</li>
-  <li>Opening it does not move focus. The menu markup sits at the very end of the
-  page, so moving forward from the hamburger takes you into the hero, the events,
-  the spotlight and the news, all of which the menu is visually covering, before you
-  ever reach its links.</li>
-  <li>None of that content behind the panel is made unreachable, so you are reading
-  a page that sighted people in the room cannot see.</li>
-  <li>When you do get there, Contact Us appears twice, because the navigation exists
-  twice in the page.</li>
-</ul>
-
-<h2 id="colour">1. Colour</h2>
-
-<h3>Slide 4 — Use enough contrast between text and its background</h3>
+<h4>Slide 4: Use enough contrast between text and its background</h4>
 <figure><img src="slides/slide-04.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "1. Colour", then the heading. Contrast ratios
 should be at least 4.5:1 for normal text and 3:1 for large text.</p>
 <p><strong>Shown:</strong> the bad site's hero, a photo of two runners, one a
-blindfolded athlete running with a guide. White text "Welcome to Let's Play" sits
-directly on the busy photo, and the blue "View upcoming events" button is boxed in
-red to mark it as the problem. Beside it, two contrast-checker panels: white on
-grey scores 2.35 to 1, and near-white on light blue scores 2.54 to 1. Both read
-Fail, with crosses against normal text, large text and graphics.</p>
+blindfolded athlete running with a guide. White text reading "Welcome to Let's Play"
+sits directly on the busy photo. The blue "View upcoming events" button is boxed in
+red to mark it as the problem. Beside it are two contrast-checker panels. White on
+grey scores 2.35 to 1. Near-white on light blue scores 2.54 to 1. Both read Fail,
+with crosses against normal text, large text and graphics.</p>
 
-<h3>Slide 5 — Use enough contrast between text and its background (continued)</h3>
+<h4>Slide 5: Use enough contrast between text and its background (continued)</h4>
 <figure><img src="slides/slide-05.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> no text of its own.</p>
 <p><strong>Shown:</strong> the first event card, "Tuesday Stadium Run", with its
@@ -273,7 +386,7 @@ date and location line boxed in red. That line is pale pink on white. On the rig
 the bad site's bright pink footer, and a contrast checker giving that pink on white
 2.16 to 1, another Fail across the board.</p>
 
-<h3>Slide 6 — Don't rely on colour to carry meaning</h3>
+<h4>Slide 6: Don't rely on colour to carry meaning</h4>
 <figure><img src="slides/slide-06.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> the heading only.</p>
 <p><strong>Shown:</strong> two event cards side by side, Tuesday Stadium Run and
@@ -281,55 +394,54 @@ Wednesday Sunset Yoga. Each has a small dot in its top right corner, boxed in re
 One dot is green, one is red. That dot is the only thing telling you one event has
 spots available and the other is fully booked. There is no text label anywhere.</p>
 
-<h3>Slide 7 — Don't rely on colour to carry meaning (continued)</h3>
+<h4>Slide 7: Don't rely on colour to carry meaning (continued)</h4>
 <figure><img src="slides/slide-07.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> the same heading.</p>
 <p><strong>Shown:</strong> the identical pair of cards with all colour removed. Both
-dots are now the same mid-grey and indistinguishable. That is the point of showing the two
-slides together, because once the colour is taken away the information has gone
-with it.</p>
+dots are now the same mid-grey and indistinguishable. The two slides are shown
+together so that the same pair of cards can be seen with and without colour.</p>
 
-<h2 id="touch">2. Touch target</h2>
+<h3 id="touch">2. Touch target</h3>
 
-<h3>Slide 8 — Make interactive elements at least 24 by 24 pixels</h3>
+<h4>Slide 8: Make interactive elements at least 24 by 24 pixels</h4>
 <figure><img src="slides/slide-08.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "2. Touch target", then the heading.</p>
 <p><strong>Shown:</strong> two failures marked with large red crosses. The bright
 pink footer with three tiny social media icons crammed together in a red box, and
 the hero's three carousel dots, also boxed. Both are well under the minimum size.</p>
 
-<h2 id="alt">3. Text alternatives</h2>
+<h3 id="alt">3. Text alternatives</h3>
 
-<h3>Slide 9 — Write alt text that describes the image's purpose</h3>
+<h4>Slide 9: Write alt text that describes the image's purpose</h4>
 <figure><img src="slides/slide-09.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "3. Text alternatives", then the heading. Short and
 to the point. Descriptive enough to provide relevant content and context. Should not
 contain any extra or unnecessary information, and should not repeat information that
 is already provided in the text.</p>
 <p><strong>Shown:</strong> a photo of an outdoor yoga class on grass, several people
-resting in child's pose on mats. Two captions over it, each with a red cross:
-"IMG_2886.jpg" and "People doing yoga." One says nothing, the other says too little.</p>
+resting in child's pose on mats. Two captions sit over it, each with a red cross.
+The first reads "IMG_2886.jpg" and the second reads "People doing yoga."</p>
 
-<h3>Slide 10 — Write alt text that describes the image's purpose (continued)</h3>
+<h4>Slide 10: Write alt text that describes the image's purpose (continued)</h4>
 <figure><img src="slides/slide-10.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> the caption, with a green tick: "A group outdoor
 yoga class on a grassy lawn, participants resting in child's pose on their mats."</p>
 <p><strong>Shown:</strong> the same yoga photo, now full width, with that caption
 boxed over it.</p>
 
-<h3>Slide 11 — Use empty alt text for decorative images</h3>
+<h4>Slide 11: Use empty alt text for decorative images</h4>
 <figure><img src="slides/slide-11.jpg" alt=""></figure>
-<p><strong>On the slide:</strong> the heading, then: an alt text should be empty,
-<code>alt=""</code>, when an image is purely decorative and provides no meaningful
-information to the user.</p>
+<p><strong>On the slide:</strong> the heading, then this text. An alt text should
+be empty, <code>alt=""</code>, when an image is purely decorative and provides no
+meaningful information to the user.</p>
 <p><strong>Shown:</strong> the site's open navigation menu, listing Home, Events,
 About, News, Contact Us and Login, each with a small blue icon beside it. Two
 captions: "Home icon" with a red cross, and empty quote marks with a green tick.
 The icons repeat what the link text already says, so they should be silent.</p>
 
-<h2 id="names">4. Names and labels</h2>
+<h3 id="names">4. Names and labels</h3>
 
-<h3>Slide 12 — Give every button a meaningful label</h3>
+<h4>Slide 12: Give every button a meaningful label</h4>
 <figure><img src="slides/slide-12.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "4. Names and Labels", then the heading.</p>
 <ol>
@@ -342,19 +454,18 @@ The icons repeat what the link text already says, so they should be silent.</p>
 <p><strong>Shown:</strong> the bad site's hero again, with the three carousel dots
 boxed in red and a caption reading "Button", "Button", "Button" with a red cross.</p>
 
-<h3>Slide 13 — Give every button a meaningful label (continued)</h3>
+<h4>Slide 13: Give every button a meaningful label (continued)</h4>
 <figure><img src="slides/slide-13.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> the caption "Button", "Button", "Button" with a
 red cross.</p>
 <p><strong>Shown:</strong> the phone view of the site on the left with the dots
 boxed, and on the right the VoiceOver Form Controls rotor panel open. It lists
-fourteen entries. One reads "View upcoming events" and every other one reads simply
-"button". Thirteen identical entries in a row.</p>
-<p class="note">This is probably the strongest screen reader moment in the deck, so
-it is worth doing live if you can. Bringing up the form controls rotor on the bad
-page shows the problem more clearly than any explanation would.</p>
+fourteen entries. One reads "View upcoming events". The other thirteen all read
+"button".</p>
+<p class="note">The form controls rotor produces this same list live on the bad
+page, if you would rather show it than leave it as a screenshot.</p>
 
-<h3>Slide 14 — Give every button a meaningful label (continued)</h3>
+<h4>Slide 14: Give every button a meaningful label (continued)</h4>
 <figure><img src="slides/slide-14.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> no text of its own.</p>
 <p><strong>Shown:</strong> two event cards with their Register buttons boxed in red,
@@ -366,45 +477,46 @@ Nothing in it says where any of those links go.</p>
 above it does not quite cover what it shows. It would be worth raising with
 Adeline before the session.</p>
 
-<h3>Slide 15 — Add an aria-label to icon-only buttons</h3>
+<h4>Slide 15: Add an aria-label to icon-only buttons</h4>
 <figure><img src="slides/slide-15.jpg" alt=""></figure>
-<p><strong>On the slide:</strong> the heading, then: icon-only buttons absolutely
-require an aria-label. Then a code sample: a button element with
+<p><strong>On the slide:</strong> the heading, then this text. Icon-only buttons
+absolutely require an aria-label. Then a code sample, a button element with
 <code>aria-label="Facebook link"</code> wrapping an SVG marked
 <code>aria-hidden="true"</code>.</p>
 <p><strong>Shown:</strong> the pink footer with its three social icons boxed in red,
 captioned "link", "link", "link" with a red cross.</p>
 
-<h3>Slide 16 — Use visible labels on form fields, not placeholder text</h3>
+<h4>Slide 16: Use visible labels on form fields, not placeholder text</h4>
 <figure><img src="slides/slide-16.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> the heading only.</p>
-<p><strong>Shown:</strong> the bad Event Registration form. Three input boxes with
-only faint grey placeholder text inside them, Full Name star, Email star and Phone,
-all boxed in red. Below: a date question with three pill buttons, a Terms and
-Conditions checkbox, a "Slide to verify" human check, a Complete Registration button,
-and "* = required" in small pink text at the bottom.</p>
+<p><strong>Shown:</strong> the bad Event Registration form. Three input boxes hold
+only faint grey placeholder text, reading Full Name star, Email star and Phone, and
+all three are boxed in red. Below them are a date question with three pill buttons,
+a Terms and Conditions checkbox, a "Slide to verify" human check, a Complete
+Registration button, and "* = required" in small pink text at the bottom.</p>
 
-<h3>Slide 17 — Use visible labels on form fields, not placeholder text (continued)</h3>
+<h4>Slide 17: Use visible labels on form fields, not placeholder text (continued)</h4>
 <figure><img src="slides/slide-17.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> no text beyond the two labels, "Do" with a green
 tick and "Don't" with a red cross.</p>
 <p><strong>Shown:</strong> two versions of the same short sign-in form. On the left,
 visible labels sit above each field: Email address, Password. On the right, the same
-fields carry only placeholder text inside the box, which vanishes the moment you
-start typing.</p>
+fields carry only placeholder text inside the box, which disappears as soon as you
+type.</p>
 
-<h3>Slide 18 — Avoid ambiguous text</h3>
+<h4>Slide 18: Avoid ambiguous text</h4>
 <figure><img src="slides/slide-18.jpg" alt=""></figure>
-<p><strong>On the slide:</strong> the heading, then: when a screen reader encounters
-ambiguous text like "10/3", it may read it as a fraction or confuse the month and day
-depending on the user's regional settings. Then a caption: "Tuesday, ten slash three"
-with a red cross, and the question "Is it 10th of March or 3rd of October?"</p>
+<p><strong>On the slide:</strong> the heading, then this text. When a screen reader
+encounters ambiguous text like "10/3", it may read it as a fraction, or confuse the
+month and the day depending on the user's regional settings. Below that is a caption
+reading "Tuesday, ten slash three" with a red cross, and the question "Is it 10th of
+March or 3rd of October?"</p>
 <p><strong>Shown:</strong> the Tuesday Stadium Run card with "Tue, 10/3," boxed in
 red inside its date line.</p>
 
-<h2 id="semantics">5. Semantics</h2>
+<h3 id="semantics">5. Semantics</h3>
 
-<h3>Slide 19 — Use real heading levels, not just large text</h3>
+<h4>Slide 19: Use real heading levels, not just large text</h4>
 <figure><img src="slides/slide-19.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "5. Semantics", then the heading.</p>
 <ul>
@@ -415,26 +527,26 @@ red inside its date line.</p>
 </ul>
 <p><strong>Shown:</strong> text only.</p>
 
-<h3>Slide 20 — Use real heading levels, not just large text (continued)</h3>
+<h4>Slide 20: Use real heading levels, not just large text (continued)</h4>
 <figure><img src="slides/slide-20.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> Many assistive technology users skim a page by
 jumping from heading to heading via the rotor. If headings are missing or out of
 order, they lose their primary way to scan the page.</p>
 <p><strong>Shown:</strong> the bad site with the VoiceOver headings rotor open over
 it. It finds only three headings, and all three are level 4: Upcoming Events,
-Athlete Spotlight, Latest News. There is no level 1 and no level 2 on the page at all.</p>
+Athlete Spotlight, Latest News. There is no level 1 and no level 2 on the page.</p>
 
-<h3>Slide 21 — Use real heading levels, not just large text (continued)</h3>
+<h4>Slide 21: Use real heading levels, not just large text (continued)</h4>
 <figure><img src="slides/slide-21.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> four labels, each with a green tick: H1, H2, H2, H3.</p>
 <p><strong>Shown:</strong> two phone views of the improved site with the labels
 pinned to the elements they belong to. "Every Body Belongs" is marked H1, "Upcoming
-Events" is marked H2, and the event title "Tuesday Stadium Run" is marked H3. One
-level at a time, top to bottom.</p>
+Events" is marked H2, and the event title "Tuesday Stadium Run" is marked H3. The
+levels descend one at a time from top to bottom.</p>
 
-<h3>Slide 22 — Use landmark elements: header, nav, main, footer</h3>
+<h4>Slide 22: Use landmark elements: header, nav, main, footer</h4>
 <figure><img src="slides/slide-22.jpg" alt=""></figure>
-<p><strong>On the slide:</strong> the heading, then:</p>
+<p><strong>On the slide:</strong> the heading, then these points:</p>
 <ul>
   <li>Use proper named regions, so someone can jump straight to the part they want
   instead of swiping through everything above it.</li>
@@ -446,7 +558,7 @@ level at a time, top to bottom.</p>
 across the top, a narrow nav column down the left, a large main area filling the
 middle, and a footer strip across the bottom.</p>
 
-<h3>Slide 23 — Use landmark elements: header, nav, main, footer (continued)</h3>
+<h4>Slide 23: Use landmark elements: header, nav, main, footer (continued)</h4>
 <figure><img src="slides/slide-23.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> three labels reading <code>&lt;div&gt;</code>,
 each with a red cross.</p>
@@ -455,47 +567,48 @@ drawn round the header strip, the hamburger button and the whole body of the pag
 Every one of them is an unnamed div, so there is nothing for the landmarks rotor
 to find.</p>
 
-<h3>Slide 24 — Use landmark elements: header, nav, main, footer (continued)</h3>
+<h4>Slide 24: Use landmark elements: header, nav, main, footer (continued)</h4>
 <figure><img src="slides/slide-24.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> three labels with green ticks:
 <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>.</p>
 <p><strong>Shown:</strong> the same page, same boxes, now drawn in green and labelled
 with the real elements instead of divs.</p>
 
-<h3>Slide 25 — Use the real element instead of a styled div</h3>
+<h4>Slide 25: Use the real element instead of a styled div</h4>
 <figure><img src="slides/slide-25.jpg" alt=""></figure>
-<p><strong>On the slide:</strong> the heading, then:</p>
+<p><strong>On the slide:</strong> the heading, then these points:</p>
 <ul>
   <li>If the browser has an element for it, use it.</li>
   <li>A div in a costume gives you nothing: no announced role, no announced state,
   no keyboard behaviour, no focusability.</li>
 </ul>
-<p>Then a caption: don't use a stylised <code>&lt;div&gt;</code>, with a red cross.
-Use a proper checkbox or radio button for selectors. An
-<code>&lt;input type="radio"&gt;</code> with <code>aria-checked</code> true or false.</p>
+<p>Then a caption reading: don't use a stylised <code>&lt;div&gt;</code>, with a
+red cross. Use a proper checkbox or radio button for selectors. An
+<code>&lt;input type="radio"&gt;</code> with <code>aria-checked</code> true or
+false.</p>
 <p><strong>Shown:</strong> the full registration form on the right, with the row of
-three date pills boxed in red. They look like a radio group and behave like nothing
-at all.</p>
+three date pills boxed in red. They look like a radio group but have none of the
+behaviour of one.</p>
 
-<h2 id="focus">6. Focus</h2>
+<h3 id="focus">6. Focus</h3>
 
-<h3>Slide 26 — Show a visible focus ring on every interactive element</h3>
+<h4>Slide 26: Show a visible focus ring on every interactive element</h4>
 <figure><img src="slides/slide-26.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "6. Focus", then the heading. You must always see
 where you are, the focus ring. Never <code>outline: none</code> without a replacement.</p>
 <p><strong>Shown:</strong> a small panel of plain controls, each drawn with a clear
 blue focus ring: a slider, a button, a radio button and a text field.</p>
 
-<h3>Slide 27 — Keep the focus order the same as the visual order</h3>
+<h4>Slide 27: Keep the focus order the same as the visual order</h4>
 <figure><img src="slides/slide-27.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> the heading, and a note with a red cross: focus
 skips the date selector, terms and conditions checkbox, and human verification.</p>
 <p><strong>Shown:</strong> the registration form with a purple line traced across it,
 numbered one to six, showing the real focus path. It goes logo, hamburger, then the
-three text fields, then jumps straight to Complete Registration. The date pills, the
-checkbox and the verification slider are never visited at all.</p>
+three text fields, then jumps straight to Complete Registration. The date pills,
+the checkbox and the verification slider are never visited.</p>
 
-<h3>Slide 28 — Make content behind an open overlay unreachable</h3>
+<h4>Slide 28: Make content behind an open overlay unreachable</h4>
 <figure><img src="slides/slide-28.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "Focus management:" then the heading.</p>
 <p><strong>Shown:</strong> the site's navigation panel open as a full overlay, with
@@ -505,9 +618,9 @@ and Login.</p>
 the document, so moving forward from the hamburger takes you through the whole page
 underneath it before you reach any of these links.</p>
 
-<h2 id="carousels">7. Carousels</h2>
+<h3 id="carousels">7. Carousels</h3>
 
-<h3>Slide 29 — Treat a carousel as a last resort</h3>
+<h4>Slide 29: Treat a carousel as a last resort</h4>
 <figure><img src="slides/slide-29.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "7. Carousels", then the heading.</p>
 <ul>
@@ -520,7 +633,7 @@ underneath it before you reach any of these links.</p>
 news item is visible, "Club wins regional blind football tournament", with a photo of
 a blind football match and a Read More link. Three dots underneath.</p>
 
-<h3>Slide 30 — Carousel best practice</h3>
+<h4>Slide 30: Carousel best practice</h4>
 <figure><img src="slides/slide-30.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "Carousel best practice", as a link.</p>
 <p><strong>Shown:</strong> an example carousel from elsewhere, a coastal landscape
@@ -528,16 +641,16 @@ captioned "Travel to Southwest England and Paris". It has a clear play and pause
 control in the top left and large previous and next arrows in the top right, all
 visible on the image rather than hidden.</p>
 
-<h2 id="gestures">8. Gesture-based interaction</h2>
+<h3 id="gestures">8. Gesture-based interaction</h3>
 
-<h3>Slide 31 — Don't make swiping or dragging the only way to do something</h3>
+<h4>Slide 31: Don't make swiping or dragging the only way to do something</h4>
 <figure><img src="slides/slide-31.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "8. Gesture-based interaction", then the heading.
 Conflict with system gestures: screen reader users rely on specific swipe gestures
 to move their focus or read the screen.</p>
 <p><strong>Shown:</strong> text only.</p>
 
-<h3>Slide 32 — Don't make swiping or dragging the only way to do something (continued)</h3>
+<h4>Slide 32: Don't make swiping or dragging the only way to do something (continued)</h4>
 <figure><img src="slides/slide-32.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> Swiping left or right on a slider often accidentally
 triggers a "next element" command instead of moving the slider.</p>
@@ -548,9 +661,9 @@ handle at the left end, and it can only be operated by dragging.</p>
 have met the verification slider during Task 1 and can describe what happened when
 you tried to get past it.</p>
 
-<h2 id="improved">Closing</h2>
+<h3 id="improved">Closing</h3>
 
-<h3>Slide 33 — The improved site</h3>
+<h4>Slide 33: The improved site</h4>
 <figure><img src="slides/slide-33.jpg" alt=""></figure>
 <p><strong>On the slide:</strong> "The improved site". How might we make Let's Play
 more accessible and inclusive for visually impaired users? "Scan to access:" above a
@@ -561,9 +674,9 @@ runner and blindfolded athlete as a normal image with the text underneath it rat
 than on top: "Welcome to Let's Play", "Find your team, where everybody belongs",
 "A community sports club for people of all abilities", and a View upcoming events
 button. Upcoming Events follows below.</p>
-<p class="note"><strong>This is the second demo point.</strong> It is the same
-walkthrough as before but on the improved page, and the difference between the two
-is what the whole session has been building towards.</p>
+<p class="note"><strong>This is the second demo point.</strong> You run the same
+four tasks on the improved page. The notes for it are in
+<a href="#demo-good">the demo on the improved site</a>.</p>
 
 </main>
 
