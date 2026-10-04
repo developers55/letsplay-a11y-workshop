@@ -349,6 +349,44 @@ input::placeholder {
   font-family: 'Geologica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+.tab-list {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.tab {
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  color: #10315c;
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+}
+
+.tab.is-active {
+  border-bottom-color: var(--brand-color);
+  color: var(--brand-color);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.is-active {
+  display: block;
+}
+
+.trending-list {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.trending-list li {
+  margin-bottom: 0.75rem;
+}
+
 .news-carousel {
   position: relative;
   overflow: hidden;

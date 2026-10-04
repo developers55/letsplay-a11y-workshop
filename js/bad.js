@@ -142,6 +142,24 @@ window.selectDate = function (el) {
   el.classList.add('selected');
 };
 
+// bad.html — "Latest News" / "Trending" tabs. Switching works for mouse
+// and touch only. The tabs have no tabindex, so they're not even
+// reachable by keyboard, let alone operable with the arrow-key behaviour
+// the WAI-ARIA Tabs pattern requires — a keyboard-only user can never
+// reach "Trending" at all.
+window.switchNewsTab = function (index, el) {
+  var tabs = el.parentElement.querySelectorAll('.tab');
+  var panels = el.closest('.tabs').querySelectorAll('.tab-panel');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove('is-active');
+  }
+  for (var j = 0; j < panels.length; j++) {
+    panels[j].classList.remove('is-active');
+  }
+  el.classList.add('is-active');
+  panels[index].classList.add('is-active');
+};
+
 // bad-register.html — the dates shown now actually match whichever
 // event's "Register" link was clicked on bad.html, instead of always
 // showing Tuesday Stadium Run's dates regardless of source event. Still

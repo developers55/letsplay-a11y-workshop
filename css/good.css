@@ -21,7 +21,8 @@ body {
 /* Fix: a real, visible focus style — never remove outlines site-wide. */
 a:focus-visible,
 button:focus-visible,
-input:focus-visible {
+input:focus-visible,
+summary:focus-visible {
   outline: 3px solid #ffffff;
   outline-offset: 2px;
   border-radius: 4px;
@@ -191,6 +192,37 @@ input:focus-visible {
 
 .event-meta {
   color: #b8b6c8; /* ~8.7:1 on #252140 */
+}
+
+/* Fix: real-world accessibility info about the venue itself (step-free
+   access, parking, equipment) — the kind of thing that decides whether
+   someone can actually attend, which no amount of WCAG-conformant markup
+   on this page can substitute for. Native <details>/<summary>, so it's
+   keyboard-operable and announces its expanded/collapsed state with no
+   extra ARIA needed. */
+.accessibility-details {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+}
+
+.accessibility-details summary {
+  cursor: pointer;
+  color: #5fd4de; /* ~9.8:1 on #252140, same accent as event-link/news-link */
+  font-weight: 600;
+}
+
+.accessibility-details ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  color: #b8b6c8; /* ~8.7:1 on #252140 */
+}
+
+.accessibility-details li {
+  margin-bottom: 0.35rem;
+}
+
+.accessibility-details li:last-child {
+  margin-bottom: 0;
 }
 
 /* Fix: link text describes the destination on its own, out of context

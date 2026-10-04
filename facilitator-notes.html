@@ -307,6 +307,15 @@
       </dl>
     </div>
 
+    <div class="issue">
+      <h2><span class="num">26.</span> "Latest News"/"Trending" tabs aren't exposed as tabs at all, and the section has no heading of its own</h2>
+      <dl>
+        <dt>Bad:</dt><dd>What used to be a single "Latest News" section is now two tabs built as plain <code>&lt;div&gt;</code>s with an <code>onclick</code> handler — no <code>role="tablist"</code>, no <code>role="tab"</code>, no <code>aria-selected</code>, no <code>aria-controls</code>, no <code>role="tabpanel"</code>, and critically no <code>tabindex</code> at all, so a keyboard-only user cannot reach "Trending" no matter how they tab through the page. A screen reader has no way to know these are tabs, which one is selected, or that switching one changes what's below it. The section also lost its own heading: "Latest News" and "Trending" only exist as headings inside their own tab panel, so browsing by heading never surfaces a "News" label for the section as a whole — you only see one or the other, whichever panel happens to be open.</dd>
+        <dt>WCAG:</dt><dd><span class="wcag">4.1.2 Name, Role, Value</span> <span class="wcag">2.1.1 Keyboard</span> <span class="wcag">1.3.1 Info and Relationships</span> <span class="wcag">2.4.6 Headings and Labels</span></dd>
+        <dt>Fix:</dt><dd>Not yet built for <code>good.html</code>.</dd>
+      </dl>
+    </div>
+
   </div>
 </body>
 </html>
