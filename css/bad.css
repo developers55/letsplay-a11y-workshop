@@ -116,13 +116,22 @@ body {
   position: relative;
   min-height: 480px;
   overflow: hidden;
+  display: grid; /* slides stack in one cell, like the news carousel */
 }
 
 /* Issue: slide text sits directly on top of a busy photo/gradient — no
    scrim, no overlay, no contrast check against what's underneath
    (WCAG 1.4.3). */
+/* Inactive slides fade out (opacity) rather than display:none, so they
+   stay in the accessibility tree. With display:none, the slide a screen
+   reader was reading vanished every 3.5s and threw its cursor back to the
+   top of the page, so it could never get past the hero. */
 .carousel-slide {
-  display: none;
+  display: flex;
+  grid-area: 1 / 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -134,7 +143,8 @@ body {
 }
 
 .carousel-slide.is-active {
-  display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Issue: this is a <div>, not an <h1> — visually looks like a heading,
