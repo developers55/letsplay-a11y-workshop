@@ -131,9 +131,7 @@ window.goToEventSlide = function (carouselId, index) {
   }
 };
 
-// Issue: event photos also auto-advance with no pause/stop control
-// (WCAG 2.2.2), and swiping or picking a dot doesn't pause it either.
-// Swipe left/right works on touch screens.
+// Event photos: swipe left/right on touch screens.
 (function () {
   var carousels = document.querySelectorAll('.event-image-carousel');
 
@@ -175,9 +173,6 @@ window.goToEventSlide = function (carouselId, index) {
         }
       });
 
-      setInterval(function () {
-        goToEventSlide(carousel.id, currentIndex(carousel) + 1);
-      }, 4000);
     })(carousels[c]);
   }
 })();
