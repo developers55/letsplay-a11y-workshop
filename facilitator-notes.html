@@ -184,7 +184,7 @@
     <div class="issue">
       <h2><span class="num">12.</span> Photo alt text is the filename</h2>
       <dl>
-        <dt>Bad:</dt><dd><code>alt="IMG_2041.jpg"</code> on the athlete spotlight photo.</dd>
+        <dt>Bad:</dt><dd><code>alt="2845795815"</code> on the athlete spotlight photo — the numeric stock-photo ID, read out digit by digit.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.1.1 Non-text Content</span></dd>
         <dt>Fix:</dt><dd>Meaningful alt text describing the image, e.g. "Portrait of a smiling Let's Play club member."</dd>
       </dl>
@@ -236,9 +236,9 @@
     </div>
 
     <div class="issue">
-      <h2><span class="num">18.</span> Event card and news images have no <code>alt</code> attribute at all</h2>
+      <h2><span class="num">18.</span> Event card and news images use their file number as <code>alt</code></h2>
       <dl>
-        <dt>Bad:</dt><dd>Every event card and news item has a real licensed photo now, but none of them have an <code>alt</code> attribute — not even <code>alt=""</code>, it's just missing entirely. A browser falls back to announcing the raw <code>src</code> to a screen reader instead of nothing, which is arguably worse than a bad filename alt (issues #1 and #12) — and unlike a plain placeholder rectangle, these photos genuinely carry information a screen reader user is missing entirely (which sport, which venue, who's in it).</dd>
+        <dt>Bad:</dt><dd>Every event card and news item has a real licensed photo, but its <code>alt</code> is just the numeric stock-photo ID from the filename (e.g. <code>alt="2184920184"</code>). A screen reader reads out a long string of digits that says nothing about the photo, which is the same filename-as-alt mistake as issues #1 and #12, repeated on every card. These photos carry real information a screen reader user misses (which sport, which venue, who's in it).</dd>
         <dt>WCAG:</dt><dd><span class="wcag">1.1.1 Non-text Content</span></dd>
         <dt>Fix:</dt><dd>Real, descriptive <code>alt</code> text on every image in <code>good.html</code>, matching what's actually in each photo (e.g. "A wheelchair racing athlete in a helmet and racing wheelchair on an athletics track") rather than the event title already sitting next to it in visible text — a screen reader user gets the same picture a sighted user does, not just a repeat of the heading.</dd>
       </dl>
@@ -304,15 +304,6 @@
         <dt>Bad:</dt><dd>Wednesday Sunset Yoga's "Register" is greyed out and its click is blocked with <code>onclick="return false"</code> — a real, working fix for mouse and keyboard users alike, but a purely visual/behavioural one. No <code>aria-disabled</code>, no role change, nothing exposed to AT at all: a screen reader still announces it as an ordinary, enabled "Register" link, and only discovers it does nothing after activating it. The only hint anything's different is a colour-only status dot with a <code>title</code> attribute (hover-only, not reliably exposed) — there's no visible text anywhere saying why nothing happens.</dd>
         <dt>WCAG:</dt><dd><span class="wcag">4.1.2 Name, Role, Value</span> <span class="wcag">1.3.1 Info and Relationships</span> <span class="wcag">3.3.1 Error Identification</span></dd>
         <dt>Fix:</dt><dd><code>good.html</code>'s equivalent card uses a real <code>&lt;button disabled&gt;</code> reading "Registration full" — native <code>disabled</code> removes it from the tab order and is exposed to AT as unavailable automatically, and its own visible text explains why, right on the control itself, not just in a nearby badge.</dd>
-      </dl>
-    </div>
-
-    <div class="issue">
-      <h2><span class="num">26.</span> "Latest News"/"Trending" tabs aren't exposed as tabs at all, and the section has no heading of its own</h2>
-      <dl>
-        <dt>Bad:</dt><dd>What used to be a single "Latest News" section is now two tabs built as plain <code>&lt;div&gt;</code>s with an <code>onclick</code> handler — no <code>role="tablist"</code>, no <code>role="tab"</code>, no <code>aria-selected</code>, no <code>aria-controls</code>, no <code>role="tabpanel"</code>, and critically no <code>tabindex</code> at all, so a keyboard-only user cannot reach "Trending" no matter how they tab through the page. A screen reader has no way to know these are tabs, which one is selected, or that switching one changes what's below it. The section also lost its own heading: "Latest News" and "Trending" only exist as headings inside their own tab panel, so browsing by heading never surfaces a "News" label for the section as a whole — you only see one or the other, whichever panel happens to be open.</dd>
-        <dt>WCAG:</dt><dd><span class="wcag">4.1.2 Name, Role, Value</span> <span class="wcag">2.1.1 Keyboard</span> <span class="wcag">1.3.1 Info and Relationships</span> <span class="wcag">2.4.6 Headings and Labels</span></dd>
-        <dt>Fix:</dt><dd>Not yet built for <code>good.html</code>.</dd>
       </dl>
     </div>
 
