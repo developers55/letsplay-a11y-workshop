@@ -56,8 +56,8 @@
         </div>
 
         <div class="form-group">
-          <label for="email">Email <span class="hint">(required)</span></label>
-          <input type="email" id="email" name="email" autocomplete="email" required>
+          <label for="email">Email <span class="hint">(optional)</span></label>
+          <input type="text" inputmode="email" id="email" name="email" autocomplete="email">
         </div>
 
         <div class="form-group">
@@ -99,25 +99,33 @@
         </div>
 
         <!-- Fix: a Cloudflare Turnstile widget in place of the drag-only
-             slider — it's non-interactive for most visitors (a background
-             check, nothing to drag or click at all), and on the rare
-             occasion it does need interaction, that's a single labelled,
-             keyboard-operable checkbox rather than a puzzle (WCAG 2.1.1 /
-             4.1.2). This demo uses Cloudflare's public, non-secret test
+             slider. The widget stays visible, but inert keeps a screen
+             reader from walking through its internal elements one by one
+             (and keeps it out of the Tab order, so there's no silent stop); instead, one plain-language status line announces
+             "Security check complete. You can finish registering." when
+             it passes (WCAG 4.1.3). If Cloudflare ever needs a real click,
+             before-interactive-callback removes inert first, so its
+             labelled, keyboard-operable checkbox is reachable (WCAG 2.1.1
+             / 4.1.2). This demo uses Cloudflare's public, non-secret test
              site key (always passes, works on any hostname including
-             localhost) since this static site has no backend to verify
-             a real token against. -->
+             localhost) since this static site has no backend to verify a
+             real token against. -->
         <div class="form-group">
-          <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA"></div>
+          <div class="cf-turnstile" inert data-sitekey="1x00000000000000000000AA" data-callback="onTurnstileVerified" data-before-interactive-callback="onTurnstileNeedsInteraction"></div>
+          <p id="turnstile-status" role="status" class="sr-only"></p>
         </div>
 
-        <button type="submit" class="btn btn-primary primary-fill">Complete Registration</button>
+        <button type="submit" class="btn btn-primary primary-fill">Submit registration form</button>
       </form>
 
-      <!-- Fix: role="status" + aria-live="polite" means a screen reader
-           announces this text the moment it's filled in, same as a
-           sighted user sees the confirmation appear (WCAG 4.1.3). -->
-      <p id="form-status" role="status" aria-live="polite" class="form-status"></p>
+      <!-- Fix: after a successful submit the form is hidden and focus
+           moves to this message (tabindex="-1" makes it focusable by
+           script only). A screen reader reads it straight away, the same
+           moment a sighted user sees it, and keyboard focus isn't left
+           on a button that's no longer there (WCAG 4.1.3 / 2.4.3). No
+           aria-live here: moving focus already announces it, and a live
+           region on top would read it twice. -->
+      <p id="form-status" tabindex="-1" class="form-status"></p>
     </section>
   </main>
 

@@ -117,14 +117,27 @@ var EVENTS = {
   }
 })();
 
-// Fix: writes into the role="status"/aria-live="polite" region in the
-// page instead of alert() or a plain toggled <div> — a screen reader
-// announces this the moment it's set, same instant a sighted user sees
-// it appear (WCAG 4.1.3 Status Messages).
+// Fix: hides the form and moves focus to the confirmation message, so a
+// screen reader reads it right away and focus isn't left behind on the
+// hidden submit button (WCAG 4.1.3 / 2.4.3).
 function handleRegisterSubmit(event) {
   event.preventDefault();
   var form = event.target;
-  var selectedDate = form.querySelector('input[name="event-date"]:checked');
   var status = document.getElementById('form-status');
-  status.textContent = "Thanks for signing up for " + selectedDate.value + "! We'll email you the details shortly.";
+  status.textContent = 'Registration successful.';
+  form.hidden = true;
+  status.focus();
 }
+
+// good-register.html — Turnstile callbacks. The widget is inert so a
+// screen reader hears one short status message instead of its internal
+// elements (WCAG 4.1.3). If Cloudflare needs a real click, unhide it first
+// so the checkbox can be reached (WCAG 2.1.1).
+window.onTurnstileNeedsInteraction = function () {
+  document.querySelector('.cf-turnstile').inert = false;
+};
+
+window.onTurnstileVerified = function () {
+  document.querySelector('.cf-turnstile').inert = true;
+  document.getElementById('turnstile-status').textContent = 'Security check complete. You can finish registering.';
+};
