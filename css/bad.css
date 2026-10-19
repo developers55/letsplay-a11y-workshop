@@ -192,6 +192,7 @@ body {
 .event-image-carousel {
   position: relative;
   margin-bottom: 0.75rem;
+  touch-action: pan-y; /* horizontal swipes go to the carousel, vertical still scrolls */
 }
 
 .event-image-carousel .event-image {

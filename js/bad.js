@@ -124,11 +124,63 @@ window.goToEventSlide = function (carouselId, index) {
   var carousel = document.getElementById(carouselId);
   var images = carousel.querySelectorAll('.event-image');
   var dots = carousel.querySelectorAll('.carousel-dot');
+  index = (index + images.length) % images.length;
   for (var i = 0; i < images.length; i++) {
     images[i].classList.toggle('is-active', i === index);
     dots[i].classList.toggle('is-active', i === index);
   }
 };
+
+// Issue: event photos also auto-advance with no pause/stop control
+// (WCAG 2.2.2), and swiping or picking a dot doesn't pause it either.
+// Swipe left/right works on touch screens.
+(function () {
+  var carousels = document.querySelectorAll('.event-image-carousel');
+
+  function currentIndex(carousel) {
+    var images = carousel.querySelectorAll('.event-image');
+    for (var i = 0; i < images.length; i++) {
+      if (images[i].classList.contains('is-active')) return i;
+    }
+    return 0;
+  }
+
+  for (var c = 0; c < carousels.length; c++) {
+    (function (carousel) {
+      var startX = 0;
+      var startY = 0;
+      var swiped = false;
+
+      carousel.addEventListener('touchstart', function (e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        swiped = false;
+      }, { passive: true });
+
+      carousel.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - startX;
+        var dy = e.changedTouches[0].clientY - startY;
+        // Horizontal swipe only, so scrolling the page still works.
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          swiped = true;
+          goToEventSlide(carousel.id, currentIndex(carousel) + (dx < 0 ? 1 : -1));
+        }
+      });
+
+      // Don't let a swipe count as a tap on the card's location.href='#'.
+      carousel.addEventListener('click', function (e) {
+        if (swiped) {
+          e.stopPropagation();
+          swiped = false;
+        }
+      });
+
+      setInterval(function () {
+        goToEventSlide(carousel.id, currentIndex(carousel) + 1);
+      }, 4000);
+    })(carousels[c]);
+  }
+})();
 
 // bad-register.html — Issue: styled like a radio group, but this is
 // just a class swap on plain <div>s. No role="radio", no aria-checked,
