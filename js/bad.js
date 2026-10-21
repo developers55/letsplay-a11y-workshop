@@ -180,7 +180,10 @@ window.goToEventSlide = function (carouselId, index) {
   }
 };
 
-// Event photos: swipe left/right on touch screens.
+// Issue: event photos auto-advance with no pause/stop control (WCAG
+// 2.2.2), and swiping or picking a dot doesn't pause it either. Swipe
+// left/right works on touch screens. Photos fade via opacity (see
+// bad.css), so rotating them doesn't throw a screen reader's place.
 (function () {
   var carousels = document.querySelectorAll('.event-image-carousel');
 
@@ -197,6 +200,10 @@ window.goToEventSlide = function (carouselId, index) {
       addSwipe(carousel,
         function () { goToEventSlide(carousel.id, currentIndex(carousel) + 1); },
         function () { goToEventSlide(carousel.id, currentIndex(carousel) - 1); });
+
+      setInterval(function () {
+        goToEventSlide(carousel.id, currentIndex(carousel) + 1);
+      }, 4000);
     })(carousels[c]);
   }
 })();

@@ -205,15 +205,22 @@ body {
   position: relative;
   margin-bottom: 0.75rem;
   touch-action: pan-y; /* horizontal swipes go to the carousel, vertical still scrolls */
+  display: grid; /* photos stack in one cell, like the hero/news carousels */
 }
 
+/* Photos fade (opacity) rather than display:none, so they stay in the
+   accessibility tree while autoplay rotates them. With display:none, the
+   photo VoiceOver was on vanished and threw it back to the top. */
 .event-image-carousel .event-image {
-  display: none;
+  display: block;
+  grid-area: 1 / 1;
   margin-bottom: 0;
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 
 .event-image-carousel .event-image.is-active {
-  display: block;
+  opacity: 1;
 }
 
 .event-image-carousel .carousel-dot {
