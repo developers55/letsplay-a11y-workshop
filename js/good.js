@@ -8,6 +8,16 @@ function naturalJoin(items) {
   return items.slice(0, -1).join(', ') + ' and ' + items[items.length - 1];
 }
 
+// Fix: VoiceOver on iPhone doesn't announce an aria-label change on the
+// button it's already on, so opening the menu was silent. This hidden
+// status region (created once, on page load, so it's ready before the
+// first toggle) speaks "Menu opened" / "Menu closed" instead. The button
+// itself still reads "Close menu" / "Open menu" when revisited.
+var menuStatus = document.createElement('p');
+menuStatus.className = 'sr-only';
+menuStatus.setAttribute('role', 'status');
+document.body.appendChild(menuStatus);
+
 function toggleMenu() {
   var nav = document.getElementById('primary-nav');
   var btn = document.getElementById('menu-btn');
@@ -20,6 +30,7 @@ function toggleMenu() {
     btn.setAttribute('aria-label', 'Open menu');
     btn.classList.remove('is-open');
     if (icon) icon.textContent = 'menu';
+    menuStatus.textContent = 'Menu closed';
     // Fix: return focus to the trigger on close, in case it had moved
     // further into the menu (e.g. via the "Close menu" item) — nothing
     // left stranded inside a now-hidden panel.
@@ -30,6 +41,7 @@ function toggleMenu() {
     btn.setAttribute('aria-label', 'Close menu');
     btn.classList.add('is-open');
     if (icon) icon.textContent = 'close';
+    menuStatus.textContent = 'Menu opened';
     // Fix: focus deliberately stays on the button (standard disclosure-
     // button pattern) — its aria-expanded/aria-label change is announced
     // right where focus already is, and because the nav sits immediately

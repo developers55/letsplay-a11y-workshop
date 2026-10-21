@@ -211,14 +211,26 @@ summary:focus-visible {
   font-weight: 600;
 }
 
+/* Bullets are drawn in CSS with empty alt text (content: "•" / ""), so
+   they show on screen but a screen reader skips them. The native list
+   marker was read out as "bullet" before every line on iPhone VoiceOver. */
 .accessibility-details ul {
   margin: 0.5rem 0 0;
   padding-left: 1.25rem;
+  list-style: none;
   color: #b8b6c8; /* ~8.7:1 on #252140 */
 }
 
 .accessibility-details li {
+  position: relative;
   margin-bottom: 0.35rem;
+}
+
+.accessibility-details li::before {
+  content: "•";
+  content: "•" / ""; /* empty alt text: visible, not announced */
+  position: absolute;
+  left: -0.9rem;
 }
 
 .accessibility-details li:last-child {
