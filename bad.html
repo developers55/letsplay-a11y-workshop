@@ -20,11 +20,12 @@
       <!-- Issue: reachable and activatable by keyboard (tabindex +
            Enter/Space handler), and role="button" makes AT stop on it
            during swipe/linear navigation too — but there's still no
-           accessible name and no aria-expanded. A screen reader announces
-           it as bare "button", with no clue what it does or whether it's
+           accessible name and no aria-expanded. The icon is an SVG with no
+           text inside (an icon-font ligature would leak the word "menu"
+           into VoiceOver), so a screen reader announces it as bare "button", with no clue what it does or whether it's
            open (WCAG 4.1.2). -->
       <div class="hamburger" role="button" tabindex="0" onclick="toggleMenu()" onkeydown="handleHamburgerKey(event)">
-        <span class="material-icons-round hamburger-icon" aria-hidden="true">menu</span>
+        <svg class="hamburger-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"/></svg>
       </div>
     </div>
   </div>

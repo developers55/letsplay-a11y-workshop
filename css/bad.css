@@ -63,8 +63,9 @@ body {
    no accessible name at all, see issue #3), so a screen reader user gets
    none of this feedback. */
 .hamburger-icon {
-  font-size: 28px;
-  color: #10315c;
+  width: 28px;
+  height: 28px;
+  fill: #10315c;
 }
 
 /* Issue: the "second" nav copy is hidden using an old off-screen-position

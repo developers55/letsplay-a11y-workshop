@@ -4,6 +4,10 @@
 // Toggles the *visible* nav copy only. nav-copy-2 is never touched, so
 // it stays parked off-screen (still in the accessibility tree) no matter
 // what the hamburger does — a screen reader user hits both copies.
+// Material Icons Round "menu" / "close" paths, swapped on open/close.
+var ICON_MENU = 'M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z';
+var ICON_CLOSE = 'M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z';
+
 function toggleMenu() {
   var nav = document.getElementById('nav-copy-1');
   var hamburger = document.querySelector('.hamburger');
@@ -12,14 +16,14 @@ function toggleMenu() {
     nav.classList.remove('is-hidden-offscreen');
     nav.classList.add('is-visible');
     hamburger.classList.add('is-open');
-    if (icon) icon.textContent = 'close';
+    if (icon) icon.querySelector('path').setAttribute('d', ICON_CLOSE);
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   } else {
     nav.classList.remove('is-visible');
     nav.classList.add('is-hidden-offscreen');
     hamburger.classList.remove('is-open');
-    if (icon) icon.textContent = 'menu';
+    if (icon) icon.querySelector('path').setAttribute('d', ICON_MENU);
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
   }
