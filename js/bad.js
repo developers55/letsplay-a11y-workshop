@@ -113,6 +113,7 @@ function addSwipe(el, onNext, onPrev) {
   var items = document.querySelectorAll('#news-carousel .news-item');
   var dots = document.querySelectorAll('#news-carousel-dots .carousel-dot');
   var index = 0;
+  if (!items.length) return; // not on this page (e.g. bad-register.html)
 
   function showNewsSlide(i) {
     items[index].classList.remove('is-active');
@@ -143,6 +144,7 @@ function addSwipe(el, onNext, onPrev) {
   var slides = document.querySelectorAll('#hero-carousel .carousel-slide');
   var dots = document.querySelectorAll('#hero-carousel .carousel-dot');
   var index = 0;
+  if (!slides.length) return; // not on this page (e.g. bad-register.html)
 
   function showHeroSlide(i) {
     slides[index].classList.remove('is-active');
