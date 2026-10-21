@@ -118,6 +118,7 @@ body {
   min-height: 480px;
   overflow: hidden;
   display: grid; /* slides stack in one cell, like the news carousel */
+  touch-action: pan-y; /* horizontal swipes go to the carousel, vertical still scrolls */
 }
 
 /* Issue: slide text sits directly on top of a busy photo/gradient — no
@@ -365,6 +366,7 @@ input::placeholder {
   position: relative;
   overflow: hidden;
   display: grid;
+  touch-action: pan-y;
 }
 
 #news-carousel-dots {

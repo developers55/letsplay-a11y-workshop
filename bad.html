@@ -39,21 +39,26 @@
        below (WCAG 2.2.2), and it doesn't respect prefers-reduced-motion
        either. See the arrow/dot controls further down for the other bug
        introduced here (unlabelled buttons). -->
+  <!-- Issue: slides 2 and 3 are aria-hidden (and their buttons taken
+       out of the Tab order), and that never changes as the carousel
+       rotates. A screen reader only ever reads slide 1, whichever slide
+       is on screen, so "Every Body Belongs" and "Find Your Team" don't
+       exist for it (WCAG 1.3.1 / 4.1.2). -->
   <div class="hero-carousel" id="hero-carousel">
     <div class="carousel-slide is-active" style="background-image:url('images/1165373671.jpg')">
       <div class="hero-title">Welcome to Let's Play</div>
       <p>A community sports club for people of all abilities.</p>
       <button type="button" class="btn btn-view-activities">View upcoming events</button>
     </div>
-    <div class="carousel-slide" style="background-image:url('images/2574587767.jpg')">
+    <div class="carousel-slide" aria-hidden="true" style="background-image:url('images/2574587767.jpg')">
       <div class="hero-title">Every Body Belongs</div>
       <p>Adaptive programs for every ability, every week.</p>
-      <button type="button" class="btn btn-view-activities">View upcoming events</button>
+      <button tabindex="-1" type="button" class="btn btn-view-activities">View upcoming events</button>
     </div>
-    <div class="carousel-slide" style="background-image:url('images/1221173362.jpg')">
+    <div class="carousel-slide" aria-hidden="true" style="background-image:url('images/1221173362.jpg')">
       <div class="hero-title">Find Your Team</div>
       <p>Meet teammates who get you.</p>
-      <button type="button" class="btn btn-view-activities">View upcoming events</button>
+      <button tabindex="-1" type="button" class="btn btn-view-activities">View upcoming events</button>
     </div>
 
     <!-- Issue: slide-picker dots are bare <button> elements, no text,
@@ -162,6 +167,9 @@
 
   <section class="news-section">
     <h4 class="section-heading">Latest News</h4>
+    <!-- Issue: same as the hero, news items 2 and 3 are permanently
+         aria-hidden, so a screen reader only ever reaches the first
+         story, whichever one is on screen (WCAG 1.3.1 / 4.1.2). -->
     <div class="news-carousel" id="news-carousel">
       <div class="news-item is-active">
         <img class="news-image" src="images/3817283917.jpg" alt="3817283917">
@@ -170,18 +178,18 @@
           <a href="#" class="news-link">Read More</a>
         </div>
       </div>
-      <div class="news-item">
+      <div class="news-item" aria-hidden="true">
         <img class="news-image" src="images/2714739593.jpg" alt="2714739593">
         <div class="news-content">
           <p class="news-headline">New accessible changing rooms open next month</p>
-          <a href="#" class="news-link">Read More</a>
+          <a tabindex="-1" href="#" class="news-link">Read More</a>
         </div>
       </div>
-      <div class="news-item">
+      <div class="news-item" aria-hidden="true">
         <img class="news-image" src="images/2737441555.jpg" alt="2737441555">
         <div class="news-content">
           <p class="news-headline">Volunteer coaches needed for spring term</p>
-          <a href="#" class="news-link">Read More</a>
+          <a tabindex="-1" href="#" class="news-link">Read More</a>
         </div>
       </div>
     </div>

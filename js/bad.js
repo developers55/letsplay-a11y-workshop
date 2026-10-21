@@ -69,6 +69,40 @@ function submitForm() {
   }
 }
 
+// Touch swipe for the carousels. Only listens (passive, never calls
+// preventDefault) and only switches which slide is visible, so it doesn't
+// change what a screen reader can reach. VoiceOver/TalkBack handle their
+// own swipe gestures and don't pass them to the page.
+function addSwipe(el, onNext, onPrev) {
+  var startX = 0;
+  var startY = 0;
+  var swiped = false;
+
+  el.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    swiped = false;
+  }, { passive: true });
+
+  el.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - startX;
+    var dy = e.changedTouches[0].clientY - startY;
+    // Horizontal swipe only, so scrolling the page still works.
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      swiped = true;
+      if (dx < 0) { onNext(); } else { onPrev(); }
+    }
+  }, { passive: true });
+
+  // Don't let a swipe count as a tap on whatever is underneath.
+  el.addEventListener('click', function (e) {
+    if (swiped) {
+      e.stopPropagation();
+      swiped = false;
+    }
+  }, true);
+}
+
 // Auto-advancing carousel: no pause/stop control anywhere (WCAG 2.2.2),
 // and content changes without any aria-live announcement. Picking a dot
 // by hand doesn't reset or pause the interval either, so a slide picked
@@ -90,6 +124,10 @@ function submitForm() {
   window.goToNewsSlide = function (i) {
     showNewsSlide(i);
   };
+
+  addSwipe(document.getElementById('news-carousel'),
+    function () { showNewsSlide(index + 1); },
+    function () { showNewsSlide(index - 1); });
 
   setInterval(function () {
     showNewsSlide(index + 1);
@@ -116,6 +154,10 @@ function submitForm() {
   window.goToHeroSlide = function (i) {
     showHeroSlide(i);
   };
+
+  addSwipe(document.getElementById('hero-carousel'),
+    function () { showHeroSlide(index + 1); },
+    function () { showHeroSlide(index - 1); });
 
   setInterval(function () {
     showHeroSlide(index + 1);
@@ -149,34 +191,9 @@ window.goToEventSlide = function (carouselId, index) {
 
   for (var c = 0; c < carousels.length; c++) {
     (function (carousel) {
-      var startX = 0;
-      var startY = 0;
-      var swiped = false;
-
-      carousel.addEventListener('touchstart', function (e) {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        swiped = false;
-      }, { passive: true });
-
-      carousel.addEventListener('touchend', function (e) {
-        var dx = e.changedTouches[0].clientX - startX;
-        var dy = e.changedTouches[0].clientY - startY;
-        // Horizontal swipe only, so scrolling the page still works.
-        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-          swiped = true;
-          goToEventSlide(carousel.id, currentIndex(carousel) + (dx < 0 ? 1 : -1));
-        }
-      });
-
-      // Don't let a swipe count as a tap on the card's location.href='#'.
-      carousel.addEventListener('click', function (e) {
-        if (swiped) {
-          e.stopPropagation();
-          swiped = false;
-        }
-      });
-
+      addSwipe(carousel,
+        function () { goToEventSlide(carousel.id, currentIndex(carousel) + 1); },
+        function () { goToEventSlide(carousel.id, currentIndex(carousel) - 1); });
     })(carousels[c]);
   }
 })();
