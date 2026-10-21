@@ -74,6 +74,7 @@ function submitForm() {
 // change what a screen reader can reach. VoiceOver/TalkBack handle their
 // own swipe gestures and don't pass them to the page.
 function addSwipe(el, onNext, onPrev) {
+  if (!el) return; // carousel not on this page (e.g. bad-register.html)
   var startX = 0;
   var startY = 0;
   var swiped = false;
